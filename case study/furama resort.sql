@@ -95,7 +95,7 @@ ten_kieu_thue varchar(45)
 
 create table dich_vu_di_kem(
 ma_dich_vu_di_kem int primary key,
-ten_dich_vu_di_kem varchar(45),
+ten_dich_vu_di_kem varchar(45) not null,
 gia double,
 don_vi varchar(45),
 trang_thai varchar(45)

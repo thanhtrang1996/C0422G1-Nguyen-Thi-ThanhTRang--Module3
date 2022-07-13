@@ -1,24 +1,24 @@
-create database student_managament;
+drop  database if exists student_managament;
 
+create database student_managament;
 use student_managament;
 
 create table class(
-id int auto_increment,
-name varchar(50),
-primary key(id)
+    id int auto_increment,
+    name varchar(50),
+	primary key(id)
 );
 
 create table teacher(
-id int auto_increment,
-`name` varchar(50),
-age int ,
-country varchar(50),
-primary key(id)
+     id int auto_increment,
+    `name` varchar(50),
+     country varchar(50),
+      primary key(id)
 );
 insert into class(name)
  values ("Nhân"),("Tài"),("Phát");
  
-select * from class;
+select *from class;
 
 insert into teacher(name,age,country)
  values ("thanh",9,"QT"),("trang",10,"QT");
@@ -44,7 +44,8 @@ alter table class add age text;
 alter table class drop age;
 
 set sql_safe_update= 0;
-delete from class where point_class = 8;
+delete from class
+ where point_class = 8;
 set sql_safe_update = 1;
 
 
