@@ -215,25 +215,43 @@ value(5,2,4),(8,2,5),(15,2,6),(1,3,1),(11,3,2),(1,1,3),(2,1,2),(2,12,2);
 
 /*2.	Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự.*/
 
-select *from nhan_vien
-where (nhan_vien.ho_ten regexp '^[HKT]')  and (char_length(nhan_vien.ho_ten) <=15);
+SELECT 
+    *
+FROM
+    nhan_vien
+WHERE
+    (nhan_vien.ho_ten REGEXP '^[HKT]')
+        AND (CHAR_LENGTH(nhan_vien.ho_ten) <= 15);
 
 /*3.	Hiển thị thông tin của tất cả khách hàng có độ tuổi từ 18 đến 50 tuổi và có địa chỉ ở “Đà Nẵng” hoặc “Quảng Trị”.*/
 
-select *from khach_hang
-where  (khach_hang.dia_chi like "% Quảng Trị" or khach_hang.dia_chi like "% Đà Nẵng")and ((year(now()) - year(ngay_sinh) between 18 and 50));
+SELECT 
+    *
+FROM
+    khach_hang
+WHERE
+    (khach_hang.dia_chi LIKE '% Quảng Trị'
+        OR khach_hang.dia_chi LIKE '% Đà Nẵng')
+        AND ((YEAR(NOW()) - YEAR(ngay_sinh) BETWEEN 18 AND 50));
 
 /*4.	Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng.
  Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.*/
  
  
-select khach_hang.ma_khach_hang,khach_hang.ho_ten,count(hop_dong.ma_khach_hang) so_lan_dat_phong
-from khach_hang
-join loai_khach on khach_hang.ma_loai_khach = loai_khach.ma_loai_khach
-join hop_dong on khach_hang.ma_khach_hang = hop_dong.ma_khach_hang
-where loai_khach.ten_loai_khach ='Diamond'
-group by khach_hang.ma_khach_hang
-order by so_lan_dat_phong;
+SELECT 
+    khach_hang.ma_khach_hang,
+    khach_hang.ho_ten,
+    COUNT(hop_dong.ma_khach_hang) so_lan_dat_phong
+FROM
+    khach_hang
+        JOIN
+    loai_khach ON khach_hang.ma_loai_khach = loai_khach.ma_loai_khach
+        JOIN
+    hop_dong ON khach_hang.ma_khach_hang = hop_dong.ma_khach_hang
+WHERE
+    loai_khach.ten_loai_khach = 'Diamond'
+GROUP BY khach_hang.ma_khach_hang
+ORDER BY so_lan_dat_phong;
 
 /*5.	Hiển thị ma_khach_hang, ho_ten, ten_loai_khach, ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc,
  tong_tien (Với tổng tiền được tính theo công thức như sau: Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem,
@@ -241,16 +259,30 @@ order by so_lan_dat_phong;
 (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).*/
 
 
-select khach_hang.ma_khach_hang,khach_hang.ho_ten,loai_khach.ten_loai_khach,hop_dong.ma_hop_dong,dich_vu.ten_dich_vu,hop_dong.ngay_lam_hop_dong,hop_dong.ngay_ket_thuc,
-sum((ifnull(hop_dong_chi_tiet.so_luong*dich_vu_di_kem.gia,0))+chi_phi_thue ) tong_tien
-from khach_hang
-left  join loai_khach on khach_hang.ma_loai_khach = loai_khach.ma_loai_khach
-left join hop_dong on hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
-left join dich_vu on hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
-left join hop_dong_chi_tiet on hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
-left join dich_vu_di_kem on hop_dong_chi_tiet.ma_dich_vu_di_kem = dich_vu_di_kem.ma_dich_vu_di_kem
-group by hop_dong.ma_hop_dong
-order by khach_hang.ma_khach_hang;
+SELECT 
+    khach_hang.ma_khach_hang,
+    khach_hang.ho_ten,
+    loai_khach.ten_loai_khach,
+    hop_dong.ma_hop_dong,
+    dich_vu.ten_dich_vu,
+    hop_dong.ngay_lam_hop_dong,
+    hop_dong.ngay_ket_thuc,
+    SUM((IFNULL(hop_dong_chi_tiet.so_luong * dich_vu_di_kem.gia,
+            0)) + chi_phi_thue) tong_tien
+FROM
+    khach_hang
+        LEFT JOIN
+    loai_khach ON khach_hang.ma_loai_khach = loai_khach.ma_loai_khach
+        LEFT JOIN
+    hop_dong ON hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
+        LEFT JOIN
+    dich_vu ON hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+        LEFT JOIN
+    hop_dong_chi_tiet ON hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
+        LEFT JOIN
+    dich_vu_di_kem ON hop_dong_chi_tiet.ma_dich_vu_di_kem = dich_vu_di_kem.ma_dich_vu_di_kem
+GROUP BY hop_dong.ma_hop_dong
+ORDER BY khach_hang.ma_khach_hang;
 
 /*
 6.	Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu của tất cả các loại dịch vụ 
@@ -258,73 +290,116 @@ chưa từng được khách hàng thực hiện đặt từ quý 1 của năm 2
 
 
 
-select dich_vu.ma_dich_vu,dich_vu.ten_dich_vu,dich_vu.dien_tich,dich_vu.chi_phi_thue,loai_dich_vu.ten_loai_dich_vu
-from dich_vu
-join loai_dich_vu on dich_vu.ma_loai_dich_vu = loai_dich_vu.ma_loai_dich_vu
-join hop_dong on hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
-where dich_vu.ma_dich_vu not in(select dich_vu.ma_dich_vu
-from dich_vu
-join hop_dong on hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
-where  (( month(hop_dong.ngay_lam_hop_dong) between 1 and 3 ) and  year(hop_dong.ngay_lam_hop_dong) = "2021")
-group by dich_vu.ten_dich_vu
-)
-group by dich_vu.ten_dich_vu
-order by dich_vu.dien_tich desc;
+SELECT 
+    dich_vu.ma_dich_vu,
+    dich_vu.ten_dich_vu,
+    dich_vu.dien_tich,
+    dich_vu.chi_phi_thue,
+    loai_dich_vu.ten_loai_dich_vu
+FROM
+    dich_vu
+        JOIN
+    loai_dich_vu ON dich_vu.ma_loai_dich_vu = loai_dich_vu.ma_loai_dich_vu
+        JOIN
+    hop_dong ON hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+WHERE
+    dich_vu.ma_dich_vu NOT IN (SELECT 
+            dich_vu.ma_dich_vu
+        FROM
+            dich_vu
+                JOIN
+            hop_dong ON hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+        WHERE
+            ((MONTH(hop_dong.ngay_lam_hop_dong) BETWEEN 1 AND 3)
+                AND YEAR(hop_dong.ngay_lam_hop_dong) = '2021')
+        GROUP BY dich_vu.ten_dich_vu)
+GROUP BY dich_vu.ten_dich_vu
+ORDER BY dich_vu.dien_tich DESC;
 
 /*7.	Hiển thị thông tin ma_dich_vu, ten_dich_vu, dien_tich, so_nguoi_toi_da, chi_phi_thue, ten_loai_dich_vu của tất cả các loại dịch 
 vụ đã từng được khách hàng đặt phòng trong năm 2020 nhưng chưa từng được khách hàng đặt phòng trong năm 2021.*/
 
 
-select dich_vu.ma_dich_vu,dich_vu.ten_dich_vu,dich_vu.dien_tich,dich_vu.so_nguoi_toi_da,
-dich_vu.chi_phi_thue,loai_dich_vu.ten_loai_dich_vu
-from dich_vu
-join loai_dich_vu on dich_vu.ma_loai_dich_vu = loai_dich_vu.ma_loai_dich_vu
-join hop_dong on hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
-where dich_vu.ma_dich_vu 
- not in(select dich_vu.ma_dich_vu
-from dich_vu
-join hop_dong on hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
-where (hop_dong.ngay_lam_hop_dong ) between '2021-01-01' and '2021-12-31'
-group by dich_vu.ten_dich_vu) 
-and  year(hop_dong.ngay_lam_hop_dong ) = '2020'
-group by dich_vu.ten_dich_vu;
+SELECT 
+    dich_vu.ma_dich_vu,
+    dich_vu.ten_dich_vu,
+    dich_vu.dien_tich,
+    dich_vu.so_nguoi_toi_da,
+    dich_vu.chi_phi_thue,
+    loai_dich_vu.ten_loai_dich_vu
+FROM
+    dich_vu
+        JOIN
+    loai_dich_vu ON dich_vu.ma_loai_dich_vu = loai_dich_vu.ma_loai_dich_vu
+        JOIN
+    hop_dong ON hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+WHERE
+    dich_vu.ma_dich_vu NOT IN (SELECT 
+            dich_vu.ma_dich_vu
+        FROM
+            dich_vu
+                JOIN
+            hop_dong ON hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+        WHERE
+            (hop_dong.ngay_lam_hop_dong) BETWEEN '2021-01-01' AND '2021-12-31'
+        GROUP BY dich_vu.ten_dich_vu)
+        AND YEAR(hop_dong.ngay_lam_hop_dong) = '2020'
+GROUP BY dich_vu.ten_dich_vu;
 
  /*8.	Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau.
 Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu trên.*/
 
  /*cách1 */
 
-select khach_hang.ho_ten
-from khach_hang
-group by khach_hang.ho_ten >1;
+SELECT 
+    khach_hang.ho_ten
+FROM
+    khach_hang
+GROUP BY khach_hang.ho_ten > 1;
 
 
 /*cach2*/
-select khach_hang.ho_ten,count(khach_hang.ho_ten) so_nguoi_trung_ten
-from khach_hang
-group by khach_hang.ho_ten
-having so_nguoi_trung_ten >1;
+SELECT 
+    khach_hang.ho_ten,
+    COUNT(khach_hang.ho_ten) so_nguoi_trung_ten
+FROM
+    khach_hang
+GROUP BY khach_hang.ho_ten
+HAVING so_nguoi_trung_ten > 1;
 
 /*cach 3*/
-select distinct  khach_hang.ho_ten
-from khach_hang
-group by khach_hang.ho_ten>1;
+SELECT DISTINCT
+    khach_hang.ho_ten
+FROM
+    khach_hang
+GROUP BY khach_hang.ho_ten > 1;
 
 /*9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021 thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.*/
 
-select month(hop_dong.ngay_lam_hop_dong) thang, count(hop_dong.ngay_lam_hop_dong) so_luong_khach_hang
-from hop_dong
-where year(hop_dong.ngay_lam_hop_dong) = '2021'
-group by month(hop_dong.ngay_lam_hop_dong)
-order by thang;
+SELECT 
+    MONTH(hop_dong.ngay_lam_hop_dong) thang,
+    COUNT(hop_dong.ngay_lam_hop_dong) so_luong_khach_hang
+FROM
+    hop_dong
+WHERE
+    YEAR(hop_dong.ngay_lam_hop_dong) = '2021'
+GROUP BY MONTH(hop_dong.ngay_lam_hop_dong)
+ORDER BY thang;
 
 /*10.	Hiển thị thông tin tương ứng với từng hợp đồng thì đã sử dụng bao nhiêu dịch vụ đi kèm. Kết quả hiển thị bao gồm ma_hop_dong, 
 ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở dich_vu_di_kem).*/
 
-select  hop_dong.ma_hop_dong,hop_dong.ngay_lam_hop_dong,hop_dong.ngay_ket_thuc,hop_dong.tien_dat_coc,sum(ifnull(hop_dong_chi_tiet.so_luong,0)) so_luong_dich_vu_di_kem
-from hop_dong
-left join hop_dong_chi_tiet on hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
-group by hop_dong.ma_hop_dong;
+SELECT 
+    hop_dong.ma_hop_dong,
+    hop_dong.ngay_lam_hop_dong,
+    hop_dong.ngay_ket_thuc,
+    hop_dong.tien_dat_coc,
+    SUM(IFNULL(hop_dong_chi_tiet.so_luong, 0)) so_luong_dich_vu_di_kem
+FROM
+    hop_dong
+        LEFT JOIN
+    hop_dong_chi_tiet ON hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
+GROUP BY hop_dong.ma_hop_dong;
 
 
 
