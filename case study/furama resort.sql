@@ -401,6 +401,36 @@ FROM
     hop_dong_chi_tiet ON hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
 GROUP BY hop_dong.ma_hop_dong;
 
+/*11.	Hiển thị thông tin các dịch vụ đi kèm đã được sử dụng bởi những khách hàng có ten_loai_khach là “Diamond” và có dia_chi ở “Vinh” hoặc “Quảng Ngãi”.*/
+
+SELECT 
+    dich_vu_di_kem.ma_dich_vu_di_kem,
+    dich_vu_di_kem.ten_dich_vu_di_kem
+FROM
+    khach_hang
+        JOIN
+    loai_khach ON khach_hang.ma_loai_khach = loai_khach.ma_loai_khach
+        JOIN
+    hop_dong ON hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
+        JOIN
+    dich_vu ON hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+        JOIN
+    hop_dong_chi_tiet ON hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
+        JOIN
+    dich_vu_di_kem ON hop_dong_chi_tiet.ma_dich_vu_di_kem = dich_vu_di_kem.ma_dich_vu_di_kem
+WHERE
+    loai_khach.ten_loai_khach = 'Diamond'
+        AND (khach_hang.dia_chi LIKE '% Vinh'
+        OR khach_hang.dia_chi LIKE '% Quảng Ngãi')
+GROUP BY dich_vu_di_kem.ten_dich_vu_di_kem;
+
+/*
+12.	Hiển thị thông tin ma_hop_dong, ho_ten (nhân viên), ho_ten (khách hàng), so_dien_thoai (khách hàng), ten_dich_vu, so_luong_dich_vu_di_kem 
+(được tính dựa trên việc sum so_luong ở dich_vu_di_kem), tien_dat_coc của tất cả các dịch vụ đã từng được khách */
+
+
+
+
 
 
 
