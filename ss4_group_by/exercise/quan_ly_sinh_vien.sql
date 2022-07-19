@@ -58,7 +58,9 @@ CREATE TABLE mark (
    
    insert into mark (subjectID,studentID,mark,examtimes)
    value (1, 1, 8, 1),(1, 2, 10, 2),(2, 1, 12, 1);
-   
+  
+  -- Hiển thị tất cả các thông tin môn học (bảng subject) có credit lớn nhất
+  
 SELECT 
     *
 FROM
@@ -69,7 +71,8 @@ WHERE
         FROM
             `subject`);
           
-       
+  
+  -- Hiển thị các thông tin môn học có điểm thi lớn nhất
             
 SELECT 
     `subject`.subjectID,
@@ -86,6 +89,8 @@ WHERE
             MAX(mark)
         FROM
             mark);
+            
+-- Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, xếp hạng theo thứ tự điểm giảm dần
    
 SELECT 
     student.studentID,
