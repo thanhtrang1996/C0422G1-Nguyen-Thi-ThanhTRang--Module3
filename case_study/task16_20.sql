@@ -2,21 +2,6 @@ use furama_resort;
 
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
 
-/*set sql_safe_updates =0;
-select nhan_vien.ma_nhan_vien,nhan_vien.ho_ten
-from nhan_vien
-join hop_dong on nhan_vien.ma_nhan_vien = hop_dong.ma_nhan_vien
-
-where nhan_vien.ma_nhan_vien not in (select *from (select  nhan_vien.ma_nhan_vien 
-from nhan_vien 
-join hop_dong on nhan_vien.ma_nhan_vien = hop_dong.ma_nhan_vien
-where year(hop_dong.ngay_lam_hop_dong) between 2019 and 2021
-group by hop_dong.ma_nhan_vien
-) temp_table )
-group by hop_dong.ma_nhan_vien;
-
-set sql_safe_updates =1;*/
-
 
 SET SQL_SAFE_UPDATES = 0;
 with ma_nhan_vien_can_xoa as (
@@ -70,28 +55,45 @@ WHERE
             
   /*  
 18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).*/
-    SET SQL_SAFE_UPDATES = 0;
+
+SET SQL_SAFE_UPDATES = 0;
 with ma_khach_hang_can_xoa as (
-select ma_khach_hang from khach_hang
-where ma_khach_hang
-not in (select khach_hang.ma_khach_hang from khach_hang
+select distinct khach_hang.ma_khach_hang from khach_hang
 		join hop_dong on hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
-		where year(hop_dong.ngay_lam_hop_dong) 
-		group by  khach_hang.ma_khach_hang )
+		where  year(hop_dong.ngay_lam_hop_dong) < 2021
 )
-update nhan_vien
+update khach_hang
 set `status` = 1
-where ma_nhan_vien in (select ma_nhan_vien from ma_nhan_vien_can_xoa);
+where ma_khach_hang in (select ma_khach_hang from ma_khach_hang_can_xoa);
 SET SQL_SAFE_UPDATES = 1;
 
-select nhan_vien.ma_nhan_vien,nhan_vien.ho_ten
-from nhan_vien
-where `status` = 1;
-
-    
+select khach_hang.ma_khach_hang,khach_hang.ho_ten
+from khach_hang
+where `status` = 1;  
             
             
  /*  19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.*/
+ 
+ 
+UPDATE dich_vu_di_kem 
+SET 
+    gia = gia * 2
+WHERE
+    dich_vu_di_kem.ma_dich_vu_di_kem = (SELECT 
+            temp.ma_dich_vu_di_kem
+        FROM
+            (SELECT 
+               dich_vu_di_kem.ma_dich_vu_di_kem, dich_vu_di_kem.ten_dich_vu_di_kem, dich_vu_di_kem.gia,SUM(hop_dong_chi_tiet.so_luong)
+            FROM
+                hop_dong_chi_tiet 
+            JOIN dich_vu_di_kem  ON hop_dong_chi_tiet.ma_dich_vu_di_kem = dich_vu_di_kem.ma_dich_vu_di_kem
+            JOIN hop_dong  ON hop_dong.ma_hop_dong = hop_dong_chi_tiet.ma_hop_dong
+            WHERE
+                YEAR(hop_dong.ngay_lam_hop_dong) = 2020
+            GROUP BY hop_dong_chi_tiet.ma_dich_vu_di_kem
+            HAVING SUM(hop_dong_chi_tiet.so_luong) > 10)  temp);
+            
+            
  
  
  /*20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống, thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), 
@@ -103,7 +105,8 @@ SELECT
     nhan_vien.ngay_sinh,
     nhan_vien.so_dien_thoai,
     nhan_vien.email,
-    nhan_vien.dia_chi
+    nhan_vien.dia_chi,
+    'Nhân viên' as person
 FROM
     nhan_vien 
 UNION ALL SELECT 
@@ -112,7 +115,8 @@ UNION ALL SELECT
     khach_hang.ngay_sinh,
     khach_hang.so_dien_thoai,
     khach_hang.email,
-    khach_hang.dia_chi
+    khach_hang.dia_chi,
+    'Khách hàng' as person
 FROM
     khach_hang;
 

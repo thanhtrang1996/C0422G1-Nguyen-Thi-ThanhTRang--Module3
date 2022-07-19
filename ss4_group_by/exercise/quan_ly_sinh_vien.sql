@@ -103,7 +103,7 @@ FROM
         LEFT JOIN
     mark ON mark.studentID = student.studentID
 GROUP BY student.studentName
-ORDER BY mark.mark DESC;
+ORDER BY diem_trung_binh DESC;
 
 
       
