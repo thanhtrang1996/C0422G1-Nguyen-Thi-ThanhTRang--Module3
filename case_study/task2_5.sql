@@ -18,9 +18,11 @@ SELECT
 FROM
     khach_hang
 WHERE
-    (khach_hang.dia_chi LIKE '% Quảng Trị'
-        OR khach_hang.dia_chi LIKE '% Đà Nẵng')
+    (khach_hang.dia_chi LIKE '%Quảng Trị'
+        OR khach_hang.dia_chi LIKE '%Đà Nẵng')
         AND ((YEAR(NOW()) - YEAR(ngay_sinh) BETWEEN 18 AND 50));
+        
+	
 
 /*4.	Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng.
  Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.*/

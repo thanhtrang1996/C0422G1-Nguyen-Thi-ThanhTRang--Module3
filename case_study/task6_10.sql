@@ -70,9 +70,12 @@ Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu t
 SELECT 
     khach_hang.ho_ten
 FROM
-    khach_hang
-GROUP BY khach_hang.ho_ten > 1;
-
+    khach_hang 
+UNION 
+SELECT 
+    khach_hang.ho_ten
+FROM
+    khach_hang;
 
 /*cach2*/
 SELECT 
