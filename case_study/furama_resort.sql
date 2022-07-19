@@ -34,6 +34,7 @@ CREATE TABLE nhan_vien (
     ma_vi_tri INT NOT NULL,
     ma_trinh_do INT NOT NULL,
     ma_bo_phan INT NOT NULL,
+    `status` bit(1) default 0,
     FOREIGN KEY (ma_vi_tri)
         REFERENCES vi_tri (ma_vi_tri),
     FOREIGN KEY (ma_trinh_do)
@@ -60,6 +61,7 @@ CREATE TABLE khach_hang (
     so_dien_thoai VARCHAR(45) NOT NULL,
     email VARCHAR(45) NOT NULL,
     dia_chi VARCHAR(45) NOT NULL,
+     `status` bit(1) default 0,
     FOREIGN KEY (ma_loai_khach)
         REFERENCES loai_khach (ma_loai_khach)
 );
