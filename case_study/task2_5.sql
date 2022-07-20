@@ -16,10 +16,10 @@ WHERE
 SELECT 
     *
 FROM
-    khach_hang
+    khach_hang kh
 WHERE
-    (khach_hang.dia_chi LIKE '%Quảng Trị'
-        OR khach_hang.dia_chi LIKE '%Đà Nẵng')
+    (kh.dia_chi LIKE '%Quảng Trị'
+        OR kh.dia_chi LIKE '%Đà Nẵng')
         AND ((YEAR(NOW()) - YEAR(ngay_sinh) BETWEEN 18 AND 50));
         
 	
@@ -29,18 +29,18 @@ WHERE
  
  
 SELECT 
-    khach_hang.ma_khach_hang,
-    khach_hang.ho_ten,
-    COUNT(hop_dong.ma_khach_hang) so_lan_dat_phong
+    kh.ma_khach_hang,
+    kh.ho_ten,
+    COUNT(hd.ma_khach_hang) so_lan_dat_phong
 FROM
-    khach_hang
+    khach_hang kh
         JOIN
-    loai_khach ON khach_hang.ma_loai_khach = loai_khach.ma_loai_khach
+    loai_khach lk ON kh.ma_loai_khach = lk.ma_loai_khach
         JOIN
-    hop_dong ON khach_hang.ma_khach_hang = hop_dong.ma_khach_hang
+    hop_dong hd ON kh.ma_khach_hang = hd.ma_khach_hang
 WHERE
-    loai_khach.ten_loai_khach = 'Diamond'
-GROUP BY khach_hang.ma_khach_hang
+    lk.ten_loai_khach = 'Diamond'
+GROUP BY kh.ma_khach_hang
 ORDER BY so_lan_dat_phong;
 
 /*5.	Hiển thị ma_khach_hang, ho_ten, ten_loai_khach, ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc,
@@ -50,26 +50,26 @@ ORDER BY so_lan_dat_phong;
 
 
 SELECT 
-    khach_hang.ma_khach_hang,
-    khach_hang.ho_ten,
-    loai_khach.ten_loai_khach,
-    hop_dong.ma_hop_dong,
-    dich_vu.ten_dich_vu,
-    hop_dong.ngay_lam_hop_dong,
-    hop_dong.ngay_ket_thuc,
-    SUM((IFNULL(hop_dong_chi_tiet.so_luong * dich_vu_di_kem.gia,
+    kh.ma_khach_hang,
+    kh.ho_ten,
+    lk.ten_loai_khach,
+    hd.ma_hop_dong,
+    dv.ten_dich_vu,
+    hd.ngay_lam_hop_dong,
+    hd.ngay_ket_thuc,
+    SUM((IFNULL(hdct.so_luong * dvdk.gia,
             0)) + chi_phi_thue) tong_tien
 FROM
-    khach_hang
+    khach_hang kh
         LEFT JOIN
-    loai_khach ON khach_hang.ma_loai_khach = loai_khach.ma_loai_khach
+    loai_khach lk ON kh.ma_loai_khach = lk.ma_loai_khach
         LEFT JOIN
-    hop_dong ON hop_dong.ma_khach_hang = khach_hang.ma_khach_hang
+    hop_dong hd ON hd.ma_khach_hang = kh.ma_khach_hang
         LEFT JOIN
-    dich_vu ON hop_dong.ma_dich_vu = dich_vu.ma_dich_vu
+    dich_vu dv ON hd.ma_dich_vu = dv.ma_dich_vu
         LEFT JOIN
-    hop_dong_chi_tiet ON hop_dong_chi_tiet.ma_hop_dong = hop_dong.ma_hop_dong
+    hop_dong_chi_tiet hdct ON hdct.ma_hop_dong = hd.ma_hop_dong
         LEFT JOIN
-    dich_vu_di_kem ON hop_dong_chi_tiet.ma_dich_vu_di_kem = dich_vu_di_kem.ma_dich_vu_di_kem
-GROUP BY hop_dong.ma_hop_dong
-ORDER BY khach_hang.ma_khach_hang;
+    dich_vu_di_kem  dvdk ON hdct.ma_dich_vu_di_kem = dvdk.ma_dich_vu_di_kem
+GROUP BY hd.ma_hop_dong
+ORDER BY kh.ma_khach_hang;
