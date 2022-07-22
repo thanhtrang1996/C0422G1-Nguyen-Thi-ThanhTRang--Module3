@@ -1,0 +1,19 @@
+.first {
+    color: blue
+}
+
+.second {
+    color: deepskyblue
+}
+
+.a {
+    text-indent: inherit
+}
+
+p {
+    font-size: larger;
+    text-indent: 50px;
+    width: 80%;
+}
+
+

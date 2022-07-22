@@ -1,0 +1,12 @@
+h1{background-color: lightgoldenrodyellow;
+text-align: center;
+}
+#first{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+img:hover {
+    opacity: 0.6;
+}
+h3{color: red}
