@@ -22,7 +22,7 @@ WHERE
     dv.ma_dich_vu NOT IN (SELECT 
             dv.ma_dich_vu
         FROM
-            dich_vu
+            dich_vu dv
                 JOIN
             hop_dong hd ON hd.ma_dich_vu = dv.ma_dich_vu
         WHERE

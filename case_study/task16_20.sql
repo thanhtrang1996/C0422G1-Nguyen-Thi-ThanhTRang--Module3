@@ -143,7 +143,7 @@ SELECT
     nv.so_dien_thoai,
     nv.email,
     nv.dia_chi,
-    'Nhân viên' as person
+    'Nhân viên' as chuc_vu
 FROM
     nhan_vien nv
 UNION ALL SELECT 
@@ -153,7 +153,7 @@ UNION ALL SELECT
     kh.so_dien_thoai,
     kh.email,
     kh.dia_chi,
-    'Khách hàng' as person
+    'Khách hàng' as chuc_vu
 FROM
     khach_hang kh;
 
