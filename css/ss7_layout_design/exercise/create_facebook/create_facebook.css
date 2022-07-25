@@ -7,25 +7,41 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
-
-header {
+header{
     position: fixed;
+}
+#header{
     background-color: #1877f2;
     color: white;
+    text-align: center;
+    padding: 25px;
 }
+
+#choose{
+
+    background-color:#5f99e4;
+    color: white;
+    padding: 15px;
+
+
+}
+section{
+  margin-top: 200px;
+}
+
 
 #box1 {
     background-color: powderblue;
-
 }
 
 #box2 {
     background-color: lightgoldenrodyellow;
+    text-align: center;
 
 }
 
 #box3 {
-    background-color: yellow;
+    background-color:powderblue;
 }
 
 .col-1 {
