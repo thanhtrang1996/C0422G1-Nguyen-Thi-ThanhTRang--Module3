@@ -1,0 +1,81 @@
+body {
+    font-family: Arial;
+    font-size: 1.9em;
+    text-align: center;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+header,footer{
+    background-color:peachpuff;
+    border: 5px solid red;
+    color: red;
+}
+nav{
+    background-color: deepskyblue;
+    border: 1px solid blue;
+    text-align: center;
+    font-size: 40px;
+}
+section{
+    border: 10px solid greenyellow;
+    text-align: center;
+}
+article{
+    color: red;
+    border:  5px solid salmon;
+}
+h2{
+    background-color: lightgoldenrodyellow;
+}
+
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+

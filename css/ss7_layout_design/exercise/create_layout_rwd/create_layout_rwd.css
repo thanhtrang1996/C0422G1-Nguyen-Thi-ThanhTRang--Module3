@@ -1,0 +1,262 @@
+body {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+#content {
+    text-align: left;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+#header1 {
+    background-color: steelblue;
+    color: black;
+    font-size: 20px;
+    padding: 15px;
+
+}
+
+#a {
+    background-color: deepskyblue;
+    text-align: center;
+
+}
+
+a:hover {
+    background-color: red;
+}
+
+#b {
+    background-color: cornflowerblue;
+
+}
+
+.box {
+    border-style: solid;
+    padding: 10px 20px;
+    background-color: wheat;
+    text-align: center;
+    margin:120px;
+    height: 50px;
+    width: 80px;
+
+}
+
+#footer {
+    display: block;
+    text-align: center;
+    background-color: lightgoldenrodyellow;
+    padding: 15px;
+
+
+}
+
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+
+
+/*Màn hinh laptop và máy tính bảng*/
+@media only screen and (min-width: 741px)and (max-width: 1240px) {
+    .col-m-1 {
+        width: 8.33333%;
+    }
+
+    .col-m-2 {
+        width: 16.66667%;
+    }
+
+    .col-m-3 {
+        width: 25%;
+    }
+
+    .col-m-4 {
+        width: 33.33333%;
+    }
+
+    .col-m-5 {
+        width: 41.66667%;
+    }
+
+    .col-m-6 {
+        width: 50%;
+    }
+
+    .col-m-7 {
+        width: 58.33333%;
+    }
+
+    .col-m-8 {
+        width: 66.66667%;
+    }
+
+    .col-m-9 {
+        width: 75%;
+    }
+
+    .col-m-10 {
+        width: 83.33333%;
+    }
+
+    .col-m-11 {
+        width: 91.66667%;
+    }
+
+    .col-m-12 {
+        width: 100%;
+    }
+}
+
+/*Màn hình máy tính pc và tivi smart*/
+@media only screen and (min-width: 1241px) {
+    .col-l-1 {
+        width: 8.33333%;
+    }
+
+    .col-l-2 {
+        width: 16.66667%;
+    }
+
+    .col-l-3 {
+        width: 25%;
+    }
+
+    .col-l-4 {
+        width: 33.33333%;
+    }
+
+    .col-l-5 {
+        width: 41.66667%;
+    }
+
+    .col-l-6 {
+        width: 50%;
+    }
+
+    .col-l-7 {
+        width: 58.33333%;
+    }
+
+    .col-l-8 {
+        width: 66.66667%;
+    }
+
+    .col-l-9 {
+        width: 75%;
+    }
+
+    .col-l-10 {
+        width: 83.33333%;
+    }
+
+    .col-l-11 {
+        width: 91.66667%;
+    }
+
+    .col-l-12 {
+        width: 100%;
+    }
+}
+
+/*màn hình điện thoai*/
+@media only screen and (max-width: 740px ) {
+    .col-s-1 {
+        width: 8.33333%;
+    }
+
+    .col-s-2 {
+        width: 16.66667%;
+    }
+
+    .col-s-3 {
+        width: 25%;
+    }
+
+    .col-s-4 {
+        width: 33.33333%;
+    }
+
+    .col-s-5 {
+        width: 41.66667%;
+    }
+
+    .col-s-6 {
+        width: 50%;
+    }
+
+    .col-s-7 {
+        width: 58.33333%;
+    }
+
+    .col-s-8 {
+        width: 66.66667%;
+    }
+
+    .col-s-9 {
+        width: 75%;
+    }
+
+    .col-s-10 {
+        width: 83.33333%;
+    }
+
+    .col-s-11 {
+        width: 91.66667%;
+    }
+
+    .col-s-12 {
+        width: 100%;
+    }
+}
