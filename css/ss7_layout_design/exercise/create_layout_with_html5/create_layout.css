@@ -3,30 +3,36 @@ body {
     font-size: 1.9em;
     text-align: center;
 }
-.row{
+
+.row {
     display: flex;
     flex-wrap: wrap;
 }
-header,footer{
-    background-color:peachpuff;
+
+header, footer {
+    background-color: peachpuff;
     border: 5px solid red;
     color: red;
 }
-nav{
+
+nav {
     background-color: deepskyblue;
     border: 1px solid blue;
     text-align: center;
     font-size: 40px;
 }
-section{
+
+section {
     border: 10px solid greenyellow;
     text-align: center;
 }
-article{
+
+article {
     color: red;
-    border:  5px solid salmon;
+    border: 5px solid salmon;
 }
-h2{
+
+h2 {
     background-color: lightgoldenrodyellow;
 }
 
