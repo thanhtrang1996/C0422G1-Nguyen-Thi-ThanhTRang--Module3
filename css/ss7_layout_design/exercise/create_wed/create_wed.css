@@ -11,15 +11,17 @@ body {
     background-color: lightgoldenrodyellow;
     border: 2px solid black;
     padding: 20px;
+    font-size: 30px;
 
 }
 
 #a {
-    width: 80px;
-    height: 30px;
+    height: 60px;
+    width: 150px;
     color: red;
     border: 1px solid black;
     text-align: center;
+    background-color: salmon;
 
 }
 .display-none{
@@ -28,6 +30,9 @@ body {
 
 #content {
     background-color: powderblue;
+}
+#content a{
+    text-decoration: none;
 }
 
 #content1 {
@@ -49,6 +54,11 @@ h6 {
 }
 p{
     font-size: 30px;
+}
+.box1{
+    text-align: center;
+    border-right: 5px solid;
+
 }
 
 .col-1 {
