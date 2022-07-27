@@ -11,10 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  <h1>Time${time}</h1>
-  <a href="/MoneyServlet">Go Form</a>
-  <a href="/SimpleDictionaryServlet">Go Go Form</a>
-
-
+ <h1>Time${time}</h1>
   </body>
 </html>
