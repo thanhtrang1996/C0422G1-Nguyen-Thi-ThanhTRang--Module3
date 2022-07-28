@@ -15,15 +15,14 @@ public class CalculatorServlet extends HttpServlet {
         Double number2 = Double.parseDouble(request.getParameter("number2"));
         String operator = request.getParameter("operator");
 
-        double result =Calculator.calculator(number1,number2,operator);
-        request.setAttribute("number1",number1);
-        request.setAttribute("number2",number2);
-        request.setAttribute("operator",operator);
-        request.setAttribute("result",result);
+        double result = Calculator.calculator(number1, number2, operator);
+        request.setAttribute("number1", number1);
+        request.setAttribute("number2", number2);
+        request.setAttribute("operator", operator);
+        request.setAttribute("result", result);
 
-       request.getRequestDispatcher("result.jsp").forward(request,response);
+        request.getRequestDispatcher("result.jsp").forward(request, response);
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

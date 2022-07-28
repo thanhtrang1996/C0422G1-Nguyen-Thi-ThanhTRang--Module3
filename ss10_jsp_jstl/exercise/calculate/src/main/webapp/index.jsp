@@ -33,8 +33,9 @@
         </tr>
         <tr>
             <td>number2:</td>
-            <td><input  type="number" name="number2" placeholder=" your are number2"></td>
-        </tr><br>
+            <td><input type="number" name="number2" placeholder=" your are number2"></td>
+        </tr>
+        <br>
         <tr>
             <td><input type="submit" value="Calculate"/></td>
         </tr>
