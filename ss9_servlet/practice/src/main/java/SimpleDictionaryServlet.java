@@ -10,11 +10,7 @@ import java.util.Map;
 public class SimpleDictionaryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         Map<String, String> dictionary = new HashMap<>();
         dictionary.put("hello", "Xin chào");
         dictionary.put("how", "Thế nào");
@@ -22,20 +18,23 @@ public class SimpleDictionaryServlet extends HttpServlet {
         dictionary.put("computer", "Máy tính");
 
         String search = request.getParameter("txtSearch");
-
-        PrintWriter writer = response.getWriter();
-        writer.println("<html>");
-
+        request.setAttribute("search",search);
         String result = dictionary.get(search);
         if(result != null){
-            writer.println("Word: " + search);
-            writer.println("Result: " + result);
+            request.setAttribute("result",result);
         } else {
-            writer.println("Not found");
+            request.setAttribute("result", "not found this world");
         }
 
-        writer.println("</html>");
+        request.getRequestDispatcher("result1.jsp").forward(request,response);
+
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
 }
 
 
