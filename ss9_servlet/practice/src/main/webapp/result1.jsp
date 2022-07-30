@@ -13,13 +13,11 @@
 <body>
 <h3>Vietnamese Dictionary</h3>
 
-<form action = "/SimpleDictionaryServlet" method = "get">
-
+<form action = "/SimpleDictionaryServlet" method = "post">
     <input type="text" name="txtSearch" placeholder="Enter your word: "/>
     <input type = "submit" id = "submit" value = "Search"/>
     <p>word :${search} </p>
     <p>result: ${result}</p>
-
 </form>
 
 </body>

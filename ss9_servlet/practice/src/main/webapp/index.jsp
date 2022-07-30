@@ -14,9 +14,9 @@
 
   <h1>Time${time}</h1>
 
-  <a href="/result.jsp">Go Form</a><br>
+  <a href="/MoneyServlet">Go MoneyServlet</a><br>
 
-  <a href="/result1.jsp">Go Form</a><br>
+  <a href="/SimpleDictionaryServlet">Go SimpleDictionaryServlet</a><br>
 
 
 

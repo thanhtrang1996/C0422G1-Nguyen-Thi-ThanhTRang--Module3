@@ -10,6 +10,11 @@ import java.util.Map;
 public class SimpleDictionaryServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("result1.jsp").forward(request,response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         Map<String, String> dictionary = new HashMap<>();
         dictionary.put("hello", "Xin chào");
@@ -27,12 +32,6 @@ public class SimpleDictionaryServlet extends HttpServlet {
         }
 
         request.getRequestDispatcher("result1.jsp").forward(request,response);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
 }

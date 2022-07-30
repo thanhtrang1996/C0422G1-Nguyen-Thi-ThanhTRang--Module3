@@ -1,6 +1,6 @@
 package servlet;
 
-import models.Calculator;
+import common.Calculator;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -11,6 +11,11 @@ import java.io.IOException;
 public class CalculatorServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("title", "Simple Calculator Page");
+        request.getRequestDispatcher("home.jsp").forward(request,response);
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Double number1 = Double.parseDouble(request.getParameter("number1"));
         Double number2 = Double.parseDouble(request.getParameter("number2"));
         String operator = request.getParameter("operator");
@@ -22,9 +27,5 @@ public class CalculatorServlet extends HttpServlet {
         request.setAttribute("result", result);
 
         request.getRequestDispatcher("result.jsp").forward(request, response);
-    }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }
