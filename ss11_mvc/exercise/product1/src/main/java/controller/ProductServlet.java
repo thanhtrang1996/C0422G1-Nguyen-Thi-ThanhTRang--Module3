@@ -32,7 +32,7 @@ public class ProductServlet extends HttpServlet {
                 showDeleteProduct(request, response);
                 break;
             case "detail":
-                showDetailProduct(request,response);
+                showDetailProduct(request, response);
             default:
                 listProduct(request, response);
                 break;
@@ -50,7 +50,6 @@ public class ProductServlet extends HttpServlet {
             request.getRequestDispatcher("view/detail.jsp").forward(request, response);
         }
     }
-
 
     private void showDeleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -103,36 +102,34 @@ public class ProductServlet extends HttpServlet {
                 deleteProduct(request, response);
                 break;
             case "detail":
-                detailProduct(request,response);
+                detailProduct(request, response);
                 break;
             case "search":
-                searchProduct(request,response);
+                searchProduct(request, response);
                 break;
         }
 
     }
 
     private void searchProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       String name = request.getParameter("name");
-        List<Product> productList =  productService.findByName(name);
+        String name = request.getParameter("name");
+        List<Product> productList = productService.findByName(name);
 
-        if (productList == null){
+        if (productList == null) {
             request.getRequestDispatcher("error-404.jsp");
-        }
-        else{
-            request.setAttribute("product",productList);
-            request.setAttribute("name",name);
+        } else {
+            request.setAttribute("product", productList);
+            request.setAttribute("name", name);
 
-            request.getRequestDispatcher("view/search.jsp").forward(request,response);
+            request.getRequestDispatcher("view/search.jsp").forward(request, response);
         }
     }
 
     private void detailProduct(HttpServletRequest request, HttpServletResponse response) {
         int id = Integer.parseInt(request.getParameter("id"));
-        if(productService == null){
+        if (productService == null) {
             request.getRequestDispatcher("error-404.jsp");
-        }
-        else {
+        } else {
             productService.findById(id);
         }
     }
