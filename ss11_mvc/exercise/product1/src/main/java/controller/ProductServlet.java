@@ -118,6 +118,7 @@ public class ProductServlet extends HttpServlet {
         if (productList == null) {
             request.getRequestDispatcher("error-404.jsp");
         } else {
+            request.setAttribute("name",name);
             request.setAttribute("product", productList);
             request.getRequestDispatcher("view/list.jsp").forward(request, response);
         }
@@ -161,7 +162,6 @@ public class ProductServlet extends HttpServlet {
         String producer = request.getParameter("producer");
         Product product = new Product(id, name, price, description, producer);
         productService.save(product);
-        request.setAttribute("message", "Successfully added");
         response.sendRedirect("/products");
     }
 }
