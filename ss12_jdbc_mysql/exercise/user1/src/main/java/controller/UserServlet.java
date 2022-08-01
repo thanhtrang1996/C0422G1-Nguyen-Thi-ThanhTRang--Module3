@@ -22,7 +22,6 @@ public class UserServlet extends HttpServlet {
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
-
         }
         switch (action) {
             case "create":
@@ -44,6 +43,22 @@ public class UserServlet extends HttpServlet {
                 listAllUser(request, response);
                 break;
         }
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "create":
+                createUser(request, response);
+                break;
+            case "update":
+                updateUser(request, response);
+                break;
+        }
+
     }
 
     private void sortByNameUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -83,23 +98,7 @@ public class UserServlet extends HttpServlet {
         request.getRequestDispatcher("view/list.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-        switch (action) {
-            case "create":
-                createUser(request, response);
-                break;
 
-            case "update":
-                updateUser(request, response);
-                break;
-        }
-
-    }
 
     private void createUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("name");

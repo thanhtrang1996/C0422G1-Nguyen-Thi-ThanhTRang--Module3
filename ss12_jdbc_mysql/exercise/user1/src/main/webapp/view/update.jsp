@@ -9,33 +9,34 @@
 </head>
 <body>
 <div class="container" align="center">
-    <form action="/user?action=create" method="post">
-        <table>
+    <form action="/user?action=update" method="post">
+        <table class="m-auto bg-info">
             <thead>
+            <input type="hidden" name="id" value="${user.id}">
             <tr>
                 <th>Name: </th>
                 <td>
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" class="form-control" value="${user.name}">
                 </td>
             </tr>
             <tr>
                 <th>Email: </th>
                 <td>
-                    <input type="text" name="email" class="form-control">
+                    <input type="text" name="email" class="form-control" value="${user.email}">
                 </td>
             </tr>
             <tr>
                 <th>Country: </th>
                 <td>
-                    <input type="text" name="country" class="form-control">
+                    <input type="text" name="country" class="form-control" value="${user.country}">
                 </td>
             </tr>
             <tr>
                 <td>
-                    <a href="/user" class="btn btn-outline-secondary">Back</a>
+                    <a href="/user" class="btn btn-secondary">Back</a>
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-outline-success">Submit</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </td>
             </tr>
             </thead>

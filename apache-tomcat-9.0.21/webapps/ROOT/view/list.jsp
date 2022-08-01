@@ -15,19 +15,19 @@
     <h1 class="text-center text-red fw-bold text-uppercase">
         User List
     </h1>
-    <a href="/user?action=create" class="btn btn-success m-auto">Create new user</a><br><br>
-    <a href="/user?action=sort" class="btn btn-success m-auto">Sort</a><br><br>
+  <span> <a href="/user?action=create" class="btn btn-success m-75">Create new user</a>
+    <a href="/user?action=sort" class="btn btn-danger m-50">Sort</a></span>
     <form action="/user" method="get">
-        <table>
+        <table class="border-1">
             <thead>
             <tr>
-                <th>Country: </th>
+                <th >Country: </th>
                 <td>
                     <input type="text" name="country" class="form-control" value="${country}">
                     <input type="hidden" name="action" value="search">
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-outline-success">Search</button>
+                    <button type="submit" class="btn btn-primary m-50 ">Search</button>
                 </td>
             </tr>
             </thead>
@@ -51,13 +51,15 @@
                 <td>${user.name}</td>
                 <td>${user.email}</td>
                 <td>${user.country}</td>
-                <td><a href="/user?action=update" class="btn btn-warning"><i class="bi bi-pencil"
-                                                                                           style="font-size: 30px"></i></a>
+                <td>
+                    <a href="/user?action=update&id=${user.id}" class="btn btn-warning">
+                        <i class="bi bi-pencil" style="font-size: 30px"></i>
+                    </a>
                 </td>
                 <td>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop${user.id}">
-                        Delete
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop${user.id}">
+                        <i class="bi bi-trash" style="font-size: 30px"></i>
                     </button>
 
                     <!-- Modal -->
@@ -65,11 +67,14 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">FBI warning!</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel"> WARNING!</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    Do you want delete user ${user.name} ?
+                                   <h2 class="text-danger" >Do you want delete user  ?</h2>
+                                    <p>Name : ${user.name}</p>
+                                    <p>Email : ${user.email}</p>
+                                    <p>Country : ${user.country}</p>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="/user?action=delete&id=${user.id}" class="btn btn-outline-success">Accept</a>
@@ -88,14 +93,5 @@
 <script src="../style/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../style/datatables/js/dataTables.bootstrap4.min.js"></script>
 <script src="../style/bootstrap/bootstrap.bundle.min.js"></script>
-<%--<script>--%>
-<%--    $(document).ready(function () {--%>
-<%--        $('#myTable').dataTable({--%>
-<%--            "dom": 'lrtip',--%>
-<%--            "lengthChange": false,--%>
-<%--            "pageLength": 5--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
 </body>
 </html>

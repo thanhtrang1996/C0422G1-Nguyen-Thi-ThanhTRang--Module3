@@ -12,7 +12,7 @@
 <div class="container " align="center">
     <h1>Create new user</h1>
     <form action="/user?action=create" method="post">
-        <table>
+        <table class="border-3 bg-info m-auto ">
             <thead>
             <tr>
                 <th>Name: </th>
@@ -34,10 +34,10 @@
             </tr>
             <tr>
                 <td>
-                    <a href="/user" class="btn btn-outline-secondary">Back</a>
+                    <a href="/user" class="btn btn-secondary">Back</a>
                 </td>
                 <td>
-                    <button type="submit" class="btn btn-outline-success">Submit</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
                 </td>
             </tr>
             </thead>
