@@ -11,9 +11,9 @@
 <body>
 <div class="container " align="center">
     <form action="/products?action=create" method="post" class="border border-5 p-5 border-warning w-50 ">
-        <fieldset >
+        <fieldset>
             <legend class="text-danger text-uppercase"><h1>Create new product</h1></legend>
-            <table >
+            <table>
                 <tr>
                     <th>
                         <label for="id" class="form-label">

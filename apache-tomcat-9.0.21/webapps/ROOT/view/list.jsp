@@ -17,7 +17,7 @@
         Product List
     </h1>
     <a href="/products?action=create" class="btn btn-success m-auto">Create new product</a><br><br>
-    <form action="/products?action=search" method="post">
+    <form action="/products?action=search" method="get">
         <label for="search" class="text-primary"><b>Product Name</b></label>
         <input type="text" name="name" id="search" class="form-control w-25 d-inline-block" value="${name}">
         <button type="submit" class="btn btn-primary d-inline-block">
@@ -63,11 +63,12 @@
                                 <div class="modal-header bg-danger">
                                     <h1 class="modal-title text-light m-auto">Warning</h1>
                                 </div>
-                                <form action="/products?action=delete" method="post">
+                                <form action="/products" method="get">
                                     <!-- Modal body -->
                                     <div class="modal-body">
                                         <p class="h3 text-warning fw-bold">Do you want delete product ?</p>
                                         <input type="hidden" value="${product.id}" name="id" readonly>
+                                        <input type="hidden" value="delete" name="action" readonly>
                                         <p>Name Product : ${product.name}</p>
                                         <p>Price Product : ${product.price}</p>
                                         <p>Description Product : ${product.description}</p>
@@ -99,7 +100,7 @@
                                 <div class="modal-header bg-green">
                                     <h4 class="modal-title m-auto text-light">Detail Product</h4>
                                 </div>
-                                <form action="/products?action=detail" method="post">
+                                <form action="/products?action=detail" method="set">
                                     <!-- Modal body -->
                                     <div class="modal-body  bg-a">
                                         <input type="hidden" value="${product.id}" name="id" readonly>
@@ -132,7 +133,7 @@
         $('#myTable').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
-            "pageLength": 6
+            "pageLength": 3
         });
     });
 </script>

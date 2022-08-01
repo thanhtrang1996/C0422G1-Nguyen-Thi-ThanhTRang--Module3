@@ -14,7 +14,7 @@
         <fieldset>
             <legend class="text-warning  btn btn-primary text-uppercase"><h2>Product update</h2></legend>
             <br>
-            <table >
+            <table>
                 <tr>
                     <th>
                         <label for="id" class="form-label">

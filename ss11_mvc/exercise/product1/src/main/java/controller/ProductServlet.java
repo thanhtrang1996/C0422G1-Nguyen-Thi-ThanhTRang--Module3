@@ -29,37 +29,37 @@ public class ProductServlet extends HttpServlet {
                 showUpdateProduct(request, response);
                 break;
             case "delete":
-                showDeleteProduct(request, response);
+                deleteProduct(request, response);
                 break;
             case "detail":
-                showDetailProduct(request, response);
+                detailProduct(request, response);
+                break;
+            case "search":
+                searchProduct(request, response);
+                break;
             default:
                 listProduct(request, response);
                 break;
         }
 
     }
-
-    private void showDetailProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Product product = productService.findById(id);
-        if (product == null) {
-            request.getRequestDispatcher("error-404.jsp");
-        } else {
-            request.setAttribute("product", product);
-            request.getRequestDispatcher("view/detail.jsp").forward(request, response);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
         }
-    }
+        switch (action) {
+            case "create":
+                createProduct(request, response);
+                break;
+            case "update":
+                updateProduct(request, response);
+                break;
 
-    private void showDeleteProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Product product = productService.findById(id);
-        if (product == null) {
-            request.getRequestDispatcher("error-404.jsp");
-        } else {
-            request.setAttribute("product", product);
-            request.getRequestDispatcher("view/delete.jsp").forward(request, response);
         }
+
     }
 
     private void showUpdateProduct(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -81,33 +81,6 @@ public class ProductServlet extends HttpServlet {
         List<Product> productList = productService.findAll();
         request.setAttribute("product", productList);
         request.getRequestDispatcher("view/list.jsp").forward(request, response);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-        switch (action) {
-            case "create":
-                createProduct(request, response);
-                break;
-            case "update":
-                updateProduct(request, response);
-                break;
-            case "delete":
-                deleteProduct(request, response);
-                break;
-            case "detail":
-                detailProduct(request, response);
-                break;
-            case "search":
-                searchProduct(request, response);
-                break;
-        }
 
     }
 
