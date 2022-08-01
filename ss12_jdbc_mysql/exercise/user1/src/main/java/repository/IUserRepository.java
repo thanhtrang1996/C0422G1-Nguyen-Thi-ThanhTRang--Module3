@@ -11,6 +11,6 @@ public interface IUserRepository {
     public boolean delete(int id);
     public  boolean update(User user);
     List<User> searchByCountry(String country);
-    public List<User> sortByName(String name);
+    public List<User> sortByName();
 
 }

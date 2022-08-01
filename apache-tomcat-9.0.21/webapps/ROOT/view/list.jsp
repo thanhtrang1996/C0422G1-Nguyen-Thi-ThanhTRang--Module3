@@ -16,6 +16,7 @@
         User List
     </h1>
     <a href="/user?action=create" class="btn btn-success m-auto">Create new user</a><br><br>
+    <a href="/user?action=sort" class="btn btn-success m-auto">Sort</a><br><br>
     <form action="/user" method="get">
         <table>
             <thead>
@@ -87,14 +88,14 @@
 <script src="../style/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../style/datatables/js/dataTables.bootstrap4.min.js"></script>
 <script src="../style/bootstrap/bootstrap.bundle.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#myTable').dataTable({
-            "dom": 'lrtip',
-            "lengthChange": false,
-            "pageLength": 5
-        });
-    });
-</script>
+<%--<script>--%>
+<%--    $(document).ready(function () {--%>
+<%--        $('#myTable').dataTable({--%>
+<%--            "dom": 'lrtip',--%>
+<%--            "lengthChange": false,--%>
+<%--            "pageLength": 5--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>
 </body>
 </html>

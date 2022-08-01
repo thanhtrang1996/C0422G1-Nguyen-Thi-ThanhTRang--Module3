@@ -29,38 +29,35 @@ public class UserServlet extends HttpServlet {
                 showCreateUser(request, response);
                 break;
             case "update":
-                showUpdateUser(request,response);
+                showUpdateUser(request, response);
                 break;
-            case"delete":
-                deleteUser(request,response);
+            case "delete":
+                deleteUser(request, response);
                 break;
-            case"search":
-                searchUser(request,response);
+            case "search":
+                searchUser(request, response);
                 break;
             case "sort":
-                sortByNameUser(request,response);
+                sortByNameUser(request, response);
                 break;
-
             default:
                 listAllUser(request, response);
                 break;
         }
-
     }
 
-    private void sortByNameUser(HttpServletRequest request, HttpServletResponse response) {
-        String name = request.getParameter("name");
-        List<User> userList = userService.sortByName(name);
-
-
+    private void sortByNameUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<User> userList = userService.sortByName();
+        request.setAttribute("user", userList);
+        request.getRequestDispatcher("view/list.jsp").forward(request, response);
     }
 
     private void searchUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String country = request.getParameter("country");
-       List<User> userList = userService.searchByCountry("country");
-       request.setAttribute("country",country);
-       request.setAttribute("user",userList);
-       request.getRequestDispatcher("view/list.jsp").forward(request,response);
+        List<User> userList = userService.searchByCountry(country);
+        request.setAttribute("country", country);
+        request.setAttribute("user", userList);
+        request.getRequestDispatcher("view/list.jsp").forward(request, response);
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -118,7 +115,7 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
-        User user = new User(id,name,email,country);
+        User user = new User(id, name, email, country);
         userService.updateUser(user);
         response.sendRedirect("/user");
     }
