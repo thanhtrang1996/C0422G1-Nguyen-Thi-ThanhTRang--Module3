@@ -10,6 +10,5 @@ public interface IUserRepository {
   public List<User> selectAllUsers();
   public boolean deleteUser(int id);
   public boolean updateUser(User user);
-
   List<User> searchByName(String name);
 }

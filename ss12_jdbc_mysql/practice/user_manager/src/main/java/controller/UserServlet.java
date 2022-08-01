@@ -38,6 +38,21 @@ public class UserServlet extends HttpServlet {
                 break;
         }
     }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "create":
+                insertUser(request, response);
+                break;
+            case "edit":
+                updateUser(request, response);
+                break;
+        }
+    }
 
     private void searchUsersByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
@@ -70,21 +85,7 @@ public class UserServlet extends HttpServlet {
         request.getRequestDispatcher("view/list.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
-        switch (action) {
-            case "create":
-                insertUser(request, response);
-                break;
-            case "edit":
-                updateUser(request, response);
-                break;
-        }
-    }
+
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("id");

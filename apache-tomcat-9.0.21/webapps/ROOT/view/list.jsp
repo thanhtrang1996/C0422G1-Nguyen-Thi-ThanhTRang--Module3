@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <html>
 <head>
-    <title>Product List</title>
+    <title>User list</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../style/bootstrap/normalize.css">
     <link rel="stylesheet" href="../style/bootstrap/bootstrap.min.css">
@@ -14,107 +13,67 @@
 <body>
 <div class="container">
     <h1 class="text-center text-red fw-bold text-uppercase">
-        Product List
+        User List
     </h1>
-    <a href="/products?action=create" class="btn btn-success m-auto">Create new product</a><br><br>
-    <form action="/products?action=search" method="get">
-        <label for="search" class="text-primary"><b>Product Name</b></label>
-        <input type="text" name="name" id="search" class="form-control w-25 d-inline-block" value="${name}">
-        <button type="submit" class="btn btn-primary d-inline-block">
-            <i class="bi bi-search" style="font-size: 24px"></i>
-        </button>
+    <a href="/user?action=create" class="btn btn-success m-auto">Create new user</a><br><br>
+    <form action="/user" method="get">
+        <table>
+            <thead>
+            <tr>
+                <th>Country: </th>
+                <td>
+                    <input type="text" name="country" class="form-control" value="${country}">
+                    <input type="hidden" name="action" value="search">
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-outline-success">Search</button>
+                </td>
+            </tr>
+            </thead>
+        </table>
     </form>
     <table class="table table-hover text-center" id="myTable">
         <thead>
         <tr class="bg-a text-light">
             <th>ID</th>
             <th>NAME</th>
-            <th>PRICE</th>
-            <th>DESCRIPTION</th>
-            <th>PRODUCER</th>
+            <th>EMAIL</th>
+            <th>COUNTRY</th>
             <th>EDIT</th>
             <th>DELETE</th>
-            <th>DETAIL</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="product" items="${product}">
+        <c:forEach var="user" items="${user}">
             <tr>
-                <td>${product.id}</td>
-                <td>${product.name}</td>
-                <td>${product.price}</td>
-                <td>${product.description}</td>
-                <td>${product.producer}</td>
-                <td><a href="/products?action=update&id=${product.id}" class="btn btn-warning"><i class="bi bi-pencil"
-                                                                                                  style="font-size: 30px"></i></a>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.country}</td>
+                <td><a href="/user?action=update" class="btn btn-warning"><i class="bi bi-pencil"
+                                                                                           style="font-size: 30px"></i></a>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                            data-bs-target="#myModalDelete${product.id}">
-                        <i class="bi bi-trash" style="font-size: 30px"></i>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop${user.id}">
+                        Delete
                     </button>
 
-                    <!-- The Modal -->
-                    <div class="modal " id="myModalDelete${product.id}">
+                    <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop${user.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-
-                                <!-- Modal Header -->
-                                <div class="modal-header bg-danger">
-                                    <h1 class="modal-title text-light m-auto">Warning</h1>
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">FBI warning!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form action="/products" method="get">
-                                    <!-- Modal body -->
-                                    <div class="modal-body">
-                                        <p class="h3 text-warning fw-bold">Do you want delete product ?</p>
-                                        <input type="hidden" value="${product.id}" name="id" readonly>
-                                        <input type="hidden" value="delete" name="action" readonly>
-                                        <p>Name Product : ${product.name}</p>
-                                        <p>Price Product : ${product.price}</p>
-                                        <p>Description Product : ${product.description}</p>
-                                        <p>Producer Product : ${product.producer}</p>
-                                    </div>
-
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button class="btn btn-success" type="submit">Accept</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                            data-bs-target="#myModalDetail${product.id}">
-                        <i class="bi bi-info-circle" style="font-size: 30px"></i>
-                    </button>
-                    <!-- The Modal -->
-                    <div class="modal" id="myModalDetail${product.id}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-
-                                <!-- Modal Header -->
-                                <div class="modal-header bg-green">
-                                    <h4 class="modal-title m-auto text-light">Detail Product</h4>
+                                <div class="modal-body">
+                                    Do you want delete user ${user.name} ?
                                 </div>
-                                <form action="/products?action=detail" method="set">
-                                    <!-- Modal body -->
-                                    <div class="modal-body  bg-a">
-                                        <input type="hidden" value="${product.id}" name="id" readonly>
-                                        <p>Name Product : ${product.name}</p>
-                                        <p>Price Product : ${product.price}</p>
-                                        <p>Description Product : ${product.description}</p>
-                                        <p>Producer Product : ${product.producer}</p>
-                                    </div>
-                                    <!-- Modal footer -->
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                        </button>
-                                    </div>
-                                </form>
+                                <div class="modal-footer">
+                                    <a href="/user?action=delete&id=${user.id}" class="btn btn-outline-success">Accept</a>
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -133,7 +92,7 @@
         $('#myTable').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
-            "pageLength": 3
+            "pageLength": 5
         });
     });
 </script>
