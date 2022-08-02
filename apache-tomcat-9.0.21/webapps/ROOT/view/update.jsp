@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="../style/datatables/css/dataTables.bootstrap4.min.css"/>
 </head>
 <body>
-<div class="container p-5">
+<div class="container m-5">
     <form action="/user?action=update" method="post">
-        <table class="border-3 bg-info w-50 ">
+        <table class="border-3  w-75  ">
             <thead>
             <tr class="row">
-                <h1 class=" col-lg-12 text-danger w-50 text-center">Update User</h1>
+                <h1 class=" col-lg-12 text-danger text-center">Update User</h1>
             </tr>
             <tr class="row">
                 <th class="col-lg-3">ID User :</th>

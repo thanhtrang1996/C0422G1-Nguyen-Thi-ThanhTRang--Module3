@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="../style/datatables/css/dataTables.bootstrap4.min.css"/>
 </head>
 <body>
-<div class="container ">
+<div class="container m-5">
     <form action="/user?action=create" method="post">
-        <table class="border-3  w-50 ">
-            <thead class="bg-warning">
+        <table class="border-1 w-75  ">
+            <thead >
             <tr class="row ">
                 <td><h1 class="text-center text-primary ">Create New User</h1></td>
             </tr>
