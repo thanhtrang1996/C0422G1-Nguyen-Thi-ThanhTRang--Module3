@@ -9,34 +9,37 @@
     <link rel="stylesheet" href="../style/datatables/css/dataTables.bootstrap4.min.css"/>
 </head>
 <body>
-<div class="container " align="center">
-    <h1>Create new user</h1>
+<div class="container ">
     <form action="/user?action=create" method="post">
-        <table class="border-3 bg-info m-auto ">
-            <thead>
-            <tr>
-                <th>Name: </th>
-                <td>
+        <table class="border-3  w-50 ">
+            <thead class="bg-warning">
+            <tr class="row ">
+                <td><h1 class="text-center text-primary ">Create New User</h1></td>
+            </tr>
+            <tr class="row">
+                <th class="col-lg-3">Name: </th>
+                <td class="col-lg-9">
                     <input type="text" name="name" class="form-control">
                 </td>
-            </tr>
-            <tr>
-                <th>Email: </th>
-                <td>
+            </tr >
+            <tr class="row">
+                <th  class="col-lg-3">Email: </th>
+                <td class="col-lg-9">
                     <input type="text" name="email" class="form-control">
                 </td>
             </tr>
-            <tr>
-                <th>Country: </th>
-                <td>
+            <tr class="row">
+                <th  class="col-lg-3">Country: </th>
+                <td class="col-lg-9">
                     <input type="text" name="country" class="form-control">
                 </td>
             </tr>
-            <tr>
-                <td>
+            <tr class="row">
+                <td class="col-lg-3"></td>
+                <td class="col-lg-3">
                     <a href="/user" class="btn btn-secondary">Back</a>
                 </td>
-                <td>
+                <td class="col-lg-6">
                     <button type="submit" class="btn btn-success">Submit</button>
                 </td>
             </tr>

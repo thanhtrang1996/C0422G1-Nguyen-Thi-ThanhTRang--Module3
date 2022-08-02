@@ -14,26 +14,28 @@
 <div class="container">
     <h1 class="text-center text-red fw-bold text-uppercase">
         User List
-    </h1>
-  <span> <a href="/user?action=create" class="btn btn-success m-75">Create new user</a>
-    <a href="/user?action=sort" class="btn btn-danger m-50">Sort</a></span>
+    </h1><br><br>
+
     <form action="/user" method="get">
         <table class="border-1">
             <thead>
-            <tr>
-                <th >Country: </th>
-                <td>
+            <tr class="row">
+                <th class="col-lg-2">Country: </th>
+                <td class="col-lg-4">
                     <input type="text" name="country" class="form-control" value="${country}">
                     <input type="hidden" name="action" value="search">
                 </td>
-                <td>
+                <td class="col-lg-2">
                     <button type="submit" class="btn btn-primary m-50 ">Search</button>
-                </td>
+                </td >
+                <td class="col-lg-3">  <a href="/user?action=create" class="btn btn-success m-auto">Create new user</a> </td>
+                <td class="col-lg-1"><a href="/user?action=sort" class="btn btn-danger m-auto">Sort</a></td>
+
             </tr>
             </thead>
         </table>
     </form>
-    <table class="table table-hover text-center" id="myTable">
+    <table class="table table-hover " id="myTable">
         <thead>
         <tr class="bg-a text-light">
             <th>ID</th>
@@ -66,9 +68,8 @@
                     <div class="modal fade" id="staticBackdrop${user.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel"> WARNING!</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <div class="modal-header bg-danger">
+                                    <h3 class="modal-title  text-light " id="staticBackdropLabel"> WARNING!</h3>
                                 </div>
                                 <div class="modal-body">
                                    <h2 class="text-danger" >Do you want delete user  ?</h2>
@@ -77,8 +78,8 @@
                                     <p>Country : ${user.country}</p>
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="/user?action=delete&id=${user.id}" class="btn btn-outline-success">Accept</a>
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                    <a href="/user?action=delete&id=${user.id}" class="btn btn-success">Accept</a>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>

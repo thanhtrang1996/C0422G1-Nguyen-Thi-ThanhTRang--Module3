@@ -8,34 +8,42 @@
     <link rel="stylesheet" href="../style/datatables/css/dataTables.bootstrap4.min.css"/>
 </head>
 <body>
-<div class="container" align="center">
+<div class="container p-5">
     <form action="/user?action=update" method="post">
-        <table class="m-auto bg-info">
+        <table class="border-3 bg-info w-50 ">
             <thead>
-            <input type="hidden" name="id" value="${user.id}">
-            <tr>
-                <th>Name: </th>
-                <td>
+            <tr class="row">
+                <h1 class=" col-lg-12 text-danger w-50 text-center">Update User</h1>
+            </tr>
+            <tr class="row">
+                <th class="col-lg-3">ID User :</th>
+                <td class="col-lg-9"> <input type="text" class="form-control" name="id" value="${user.id}" disabled></td>
+
+            </tr>
+            <tr  class="row">
+                <th class="col-lg-3">Name User: </th>
+                <td class="col-lg-9">
                     <input type="text" name="name" class="form-control" value="${user.name}">
                 </td>
             </tr>
-            <tr>
-                <th>Email: </th>
-                <td>
+            <tr  class="row">
+                <th  class="col-lg-3">Email User: </th>
+                <td class="col-lg-9">
                     <input type="text" name="email" class="form-control" value="${user.email}">
                 </td>
             </tr>
-            <tr>
-                <th>Country: </th>
-                <td>
+            <tr  class="row">
+                <th  class="col-lg-3">Country User: </th>
+                <td class="col-lg-9">
                     <input type="text" name="country" class="form-control" value="${user.country}">
                 </td>
             </tr>
-            <tr>
-                <td>
+            <tr class="row">
+                <td  class="col-lg-3"></td>
+                <td class="col-lg-3" >
                     <a href="/user" class="btn btn-secondary">Back</a>
                 </td>
-                <td>
+                <td class="col-lg-6">
                     <button type="submit" class="btn btn-success">Submit</button>
                 </td>
             </tr>
