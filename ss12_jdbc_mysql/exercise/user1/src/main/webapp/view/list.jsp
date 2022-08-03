@@ -94,5 +94,15 @@
 <script src="../style/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../style/datatables/js/dataTables.bootstrap4.min.js"></script>
 <script src="../style/bootstrap/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myTable').dataTable({
+            "dom": 'lrtip',
+            "lengthChange": false,
+            "pageLength": 3,
+            "ordering": false
+        });
+    });
+</script>
 </body>
 </html>
