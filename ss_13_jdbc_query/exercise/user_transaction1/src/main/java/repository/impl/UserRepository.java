@@ -18,6 +18,7 @@ public class UserRepository implements IUserRepository {
     private final static String SORT_BY_NAME = " select * from users order by `name` ";
     private static final String INSERT_USERS = "call insert_user(?,?,?);";
     private static final String INSERT_PERMISION = "call insert_permision(?)";
+    private static final String INSERT_EMPLOYEE = "call insert_employee(?,?,?)";
 
 
     @Override
@@ -28,7 +29,7 @@ public class UserRepository implements IUserRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USER);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                int id = resultSet.getInt("user_id");
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 String country = resultSet.getString("country");
@@ -73,10 +74,10 @@ public class UserRepository implements IUserRepository {
         Connection connection = DBConnect.getConnectDB();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER);
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getCountry());
-            preparedStatement.setInt(4, user.getId());
+            preparedStatement.setInt(1, user.getId());
+            preparedStatement.setString(2, user.getName());
+            preparedStatement.setString(3, user.getEmail());
+            preparedStatement.setString(4, user.getCountry());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -158,8 +159,12 @@ public class UserRepository implements IUserRepository {
             callableStatement.setString(3,"japan");
             int affectRow =  callableStatement.executeUpdate();
 
-            callableStatement = connection.prepareCall(INSERT_PERMISION);
-            callableStatement.setString(1,"insert");
+
+            callableStatement = connection.prepareCall(INSERT_EMPLOYEE);
+            callableStatement.setString(1,"HANH");
+            callableStatement.setString(2,"3424");
+            callableStatement.setString(3,"2000-09-12");
+            
             affectRow += callableStatement.executeUpdate();
 
             if (affectRow==2){

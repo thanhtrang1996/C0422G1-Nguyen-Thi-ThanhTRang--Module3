@@ -69,10 +69,11 @@ public class UserRepository implements IUserRepository {
         Connection connection = DBConnect.getConnectDB();
         try {
             CallableStatement callableStatement = connection.prepareCall(UPDATE_USER);
+            callableStatement.setInt(1, user.getId());
             callableStatement.setString(2, user.getName());
             callableStatement.setString(3, user.getEmail());
             callableStatement.setString(4, user.getCountry());
-            callableStatement.setInt(1, user.getId());
+
             callableStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

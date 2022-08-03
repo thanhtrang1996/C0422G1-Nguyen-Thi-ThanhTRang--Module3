@@ -48,7 +48,6 @@ begin
 	end$$
 delimiter ;
 
-call get_user_by_id(1);
 delimiter $$
 create procedure insert_user(
 	in user_name varchar(255),
@@ -94,5 +93,29 @@ select * from users;
  delimiter ;
  
  call delete_user(1);
+ 
+ 
+ CREATE TABLE  employee(
+ employee_id int  AUTO_INCREMENT primary key,
+ employee_name varchar(255),
+ employee_salary varchar(255),
+  create_date date
+ );
+ 
+ delimiter $$
+create procedure insert_employee(
+	in employee_name1 varchar(255),
+	in  employee_salary1 varchar(255),
+	in  create_date1 varchar(255)
+)
+
+begin 
+	insert into employee(employee_name,employee_salary,create_date) values (employee_name1,employee_salary1,create_date);
+end$$
+delimiter ;
+ 
+ 
+ 
+ 
 
 
