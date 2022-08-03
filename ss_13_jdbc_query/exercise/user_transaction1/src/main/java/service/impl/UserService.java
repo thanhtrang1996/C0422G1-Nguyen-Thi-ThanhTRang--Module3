@@ -45,4 +45,9 @@ public class UserService implements IUserService {
     public List<User> sortByName() {
         return userRepository.sortByName();
     }
+
+    @Override
+    public String addUserTransaction() {
+        return userRepository.addUserTransaction();
+    }
 }

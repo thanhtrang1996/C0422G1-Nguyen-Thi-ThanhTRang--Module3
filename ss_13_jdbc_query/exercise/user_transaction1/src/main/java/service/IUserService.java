@@ -13,4 +13,5 @@ public interface IUserService {
     public boolean updateUser(User user);
     List<User> searchByCountry(String country);
     public List<User> sortByName();
+    public String addUserTransaction();
 }

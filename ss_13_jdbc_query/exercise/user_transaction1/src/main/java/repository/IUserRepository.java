@@ -12,5 +12,6 @@ public interface IUserRepository {
     public  boolean update(User user);
     List<User> searchByCountry(String country);
     public List<User> sortByName();
+    public String addUserTransaction();
 
 }

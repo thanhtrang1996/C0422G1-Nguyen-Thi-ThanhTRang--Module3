@@ -39,11 +39,17 @@ public class UserServlet extends HttpServlet {
             case "sort":
                 sortByNameUser(request, response);
                 break;
+            case "test":
+                addTransaction(request,response);
+                break;
             default:
                 listAllUser(request, response);
                 break;
         }
     }
+
+
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -58,6 +64,12 @@ public class UserServlet extends HttpServlet {
                 updateUser(request, response);
                 break;
         }
+
+    }
+    private void addTransaction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String mess = userService.addUserTransaction();
+        request.setAttribute("mess",mess);
+        request.getRequestDispatcher("view/list.jsp").forward(request, response);
 
     }
 

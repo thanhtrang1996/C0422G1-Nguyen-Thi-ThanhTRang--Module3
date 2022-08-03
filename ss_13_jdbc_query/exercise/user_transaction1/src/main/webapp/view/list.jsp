@@ -30,6 +30,7 @@
                 </td >
                 <td class="col-lg-3">  <a href="/user?action=create" class="btn btn-success m-auto">Create new user</a> </td>
                 <td class="col-lg-1"><a href="/user?action=sort" class="btn btn-danger m-auto">Sort</a></td>
+                <td><a href="/user?action=test">Test Transaction</a></td>
 
             </tr>
             </thead>

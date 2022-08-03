@@ -4,10 +4,7 @@ import connection.DBConnect;
 import model.User;
 import repository.IUserRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +16,8 @@ public class UserRepository implements IUserRepository {
     private static final String DELETE_USER = " delete from users where id = ?";
     private final static String SEARCH_BY_COUNTRY = " select * from users where country like ? ";
     private final static String SORT_BY_NAME = " select * from users order by `name` ";
+    private static final String INSERT_USERS = "call insert_user(?,?,?);";
+    private static final String INSERT_PERMISION = "call insert_permision(?)";
 
 
     @Override
@@ -144,6 +143,42 @@ public class UserRepository implements IUserRepository {
             }
         }
         return userList;
+    }
+
+    @Override
+    public String addUserTransaction() {
+        String mess = "ok";
+        Connection connection = DBConnect.getConnectDB();
+        CallableStatement callableStatement = null;
+        try {
+            connection.setAutoCommit(false);
+            callableStatement = connection.prepareCall(INSERT_USERS);
+            callableStatement.setString(1,"TRANG");
+            callableStatement.setString(2,"trang@gmail.com");
+            callableStatement.setString(3,"japan");
+            int affectRow =  callableStatement.executeUpdate();
+
+            callableStatement = connection.prepareCall(INSERT_PERMISION);
+            callableStatement.setString(1,"insert");
+            affectRow += callableStatement.executeUpdate();
+
+            if (affectRow==2){
+                connection.commit();
+            }else{
+                mess = "not ok";
+                connection.rollback();
+            }
+
+        } catch (SQLException e) {
+            try {
+                mess ="not ok";
+                connection.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
+return  mess;
     }
 
     @Override

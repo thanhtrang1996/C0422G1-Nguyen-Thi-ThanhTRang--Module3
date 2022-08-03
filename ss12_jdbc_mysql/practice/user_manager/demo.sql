@@ -42,7 +42,7 @@ call get_all_user();
 delimiter $$
 create procedure get_user_by_id(in user_id int)
 begin 
-	select users.`name`,users.email,users.country
+	select users.user, users.`name`,users.email,users.country
 	from users
 	where user_id = users.user_id;
 	end$$
@@ -60,6 +60,17 @@ begin
 	insert into users(`name`,email,country) values (user_name,user_email,user_country);
 end$$
 delimiter ;
+
+delimiter $$
+create procedure insert_permision(
+	in `name` varchar(255)
+)
+
+begin 
+	insert into permision(`name`) values (`name`);
+end$$
+delimiter ;
+call insert_permision('Master');
 
 insert into permision(name) values("add"),("edit"),("delete"),("view");
 

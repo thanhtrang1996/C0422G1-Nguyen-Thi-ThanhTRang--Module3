@@ -17,7 +17,7 @@
             </tr>
             <tr class="row">
                 <th class="col-lg-3">ID User :</th>
-                <td class="col-lg-9"> <input type="text" class="form-control" name="id" value="${user.id}" readonly></td>
+                <td class="col-lg-9"> <input type="text" class="form-control" name="id" value="${user.id}" disabled></td>
 
             </tr>
             <tr  class="row">

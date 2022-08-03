@@ -30,6 +30,7 @@
                 </td >
                 <td class="col-lg-3">  <a href="/user?action=create" class="btn btn-success m-auto">Create new user</a> </td>
                 <td class="col-lg-1"><a href="/user?action=sort" class="btn btn-danger m-auto">Sort</a></td>
+                <td><a href="/user?action=test">Test Transaction</a></td>
 
             </tr>
             </thead>
@@ -59,10 +60,12 @@
                     </a>
                 </td>
                 <td>
+                    <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop${user.id}">
                         <i class="bi bi-trash" style="font-size: 30px"></i>
                     </button>
 
+                    <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop${user.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
