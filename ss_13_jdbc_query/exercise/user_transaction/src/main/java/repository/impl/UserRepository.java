@@ -11,7 +11,7 @@ import java.util.List;
 public class UserRepository implements IUserRepository {
     private static final String SELECT_ALL_USER = " call get_all_user() ";
     private static final String INSERT_INTO_USER = " insert into users(name,email,country) value(?,?,?) ";
-    private static final String SELECT_USER = " call get_user_by_id(?)";
+    private static final String SELECT_USER = " call get_user_by_id(?) ";
     private static final String UPDATE_USER = " call update_user (?,?,?,?) ";
     private static final String DELETE_USER = " call delete_user(?);";
 
@@ -69,10 +69,10 @@ public class UserRepository implements IUserRepository {
         Connection connection = DBConnect.getConnectDB();
         try {
             CallableStatement callableStatement = connection.prepareCall(UPDATE_USER);
-            callableStatement.setString(1, user.getName());
-            callableStatement.setString(2, user.getEmail());
-            callableStatement.setString(3, user.getCountry());
-            callableStatement.setInt(4, user.getId());
+            callableStatement.setString(2, user.getName());
+            callableStatement.setString(3, user.getEmail());
+            callableStatement.setString(4, user.getCountry());
+            callableStatement.setInt(1, user.getId());
             callableStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,7 +95,7 @@ public class UserRepository implements IUserRepository {
             callableStatement.setInt(1, id);
             ResultSet resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
-                int useId = resultSet.getInt("id");
+                int useId = resultSet.getInt("user_id");
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 String country = resultSet.getString("country");

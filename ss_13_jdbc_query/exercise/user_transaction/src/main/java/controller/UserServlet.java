@@ -54,9 +54,6 @@ public class UserServlet extends HttpServlet {
         }
 
     }
-
-
-
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String id = request.getParameter("id");
         this.userService.deleteUser(Integer.parseInt(id));
