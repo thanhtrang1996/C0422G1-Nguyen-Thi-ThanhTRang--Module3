@@ -67,6 +67,7 @@ public class UserServlet extends HttpServlet {
     private void addTransaction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String mess = userService.addUserTransaction();
         request.setAttribute("mess",mess);
+       // listAllUser(request,response);
         request.getRequestDispatcher("view/list.jsp").forward(request, response);
 
     }
@@ -94,7 +95,6 @@ public class UserServlet extends HttpServlet {
     private void showUpdateUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String id = request.getParameter("id");
         User user = userService.selectUser(Integer.parseInt(id));
-        request.setAttribute("user", user);
         request.getRequestDispatcher("view/update.jsp").forward(request, response);
     }
 
