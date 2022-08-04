@@ -73,7 +73,6 @@ public class UserRepository implements IUserRepository {
             callableStatement.setString(2, user.getName());
             callableStatement.setString(3, user.getEmail());
             callableStatement.setString(4, user.getCountry());
-
             callableStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,11 +95,10 @@ public class UserRepository implements IUserRepository {
             callableStatement.setInt(1, id);
             ResultSet resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
-                int useId = resultSet.getInt("user_id");
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 String country = resultSet.getString("country");
-                user = new User(useId, name, email, country);
+                user = new User(id,name, email, country);
             }
         } catch (SQLException e) {
             e.printStackTrace();

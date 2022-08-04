@@ -64,7 +64,6 @@ public class UserServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         User user = userService.selectUser(id);
         request.setAttribute("user", user);
-        request.setAttribute("id", id);
         request.getRequestDispatcher("view/update.jsp").forward(request, response);
     }
 

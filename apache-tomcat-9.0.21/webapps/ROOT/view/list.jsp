@@ -30,7 +30,6 @@
                 </td >
                 <td class="col-lg-3">  <a href="/user?action=create" class="btn btn-success m-auto">Create new user</a> </td>
                 <td class="col-lg-1"><a href="/user?action=sort" class="btn btn-danger m-auto">Sort</a></td>
-                <td><a href="/user?action=test">Test Transaction</a></td>
 
             </tr>
             </thead>
@@ -63,6 +62,7 @@
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop${user.id}">
                         <i class="bi bi-trash" style="font-size: 30px"></i>
                     </button>
+
                     <div class="modal fade" id="staticBackdrop${user.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -87,9 +87,6 @@
         </c:forEach>
         </tbody>
     </table>
-    <c:if test="${mess != null}">
-        <p>${mess}</p>
-    </c:if>
 </div>
 <script src="../style/jquery/jquery-3.5.1.min.js"></script>
 <script src="../style/datatables/js/jquery.dataTables.min.js"></script>
