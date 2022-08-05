@@ -20,11 +20,17 @@ public class ServiceServlet extends HttpServlet {
             case "update":
                 showUpdateService(request, response);
                 break;
+            case "listContract":
+                showListContract(request,response);
+                break;
             default:
                 listService(request, response);
                 break;
         }
     }
+
+
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -43,7 +49,9 @@ public class ServiceServlet extends HttpServlet {
 
     }
 
-
+    private void showListContract(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("service/contract.jsp").forward(request,response);
+    }
     private void listService(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher("service/list.jsp").forward(request,response);
     }

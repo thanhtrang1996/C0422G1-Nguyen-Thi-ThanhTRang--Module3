@@ -95,7 +95,6 @@
             </div>
         </div>
     </form>
-
 </div>
 <script src="../style/jquery/jquery-3.5.1.min.js"></script>
 <script src="../style/datatables/js/jquery.dataTables.min.js"></script>

@@ -19,7 +19,7 @@
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
 </head>
 <body>
-
+<%@ include file="../include/header.jsp"%>
 <form action="/employee?action=create" method="post">
 
     <button type="button" data-bs-toggle="modal"
