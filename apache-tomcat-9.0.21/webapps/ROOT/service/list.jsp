@@ -45,11 +45,11 @@
                 <form action="/furama" method="post">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h2 class="modal-title" id="exampleModalLabel">Service</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="text" name="deleteName" id="deleteName">
+                            <input  name="deleteName" id="deleteName">
                             <span>Bạn có muốn xóa khong: </span>
                         </div>
                         <div class="modal-footer">
@@ -80,11 +80,11 @@
                 <form action="/furama" method="post">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+                            <h2 class="modal-title" id="exampleModalLabel1">Service</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="" name="deleteName" id="deleteName1">
+                            <input  name="deleteName" id="deleteName1">
                             <span>Bạn có muốn xóa khong: </span>
                         </div>
                         <div class="modal-footer">
@@ -115,11 +115,11 @@
                 <form action="/furama" method="post">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel2">Modal title</h5>
+                            <h2 class="modal-title" id="exampleModalLabel2">Service</h2>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="text" name="deleteName" id="deleteName2">
+                            <input  name="deleteName" id="deleteName2">
                             <span>Bạn có muốn xóa khong: </span>
                         </div>
                         <div class="modal-footer">

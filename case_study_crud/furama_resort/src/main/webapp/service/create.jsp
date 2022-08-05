@@ -20,213 +20,339 @@
 </head>
 </head>
 <body>
+
 <div class="container">
+    <%@ include file="../include/header.jsp" %>
     <form action="/furama?action=create" method="post">
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                Dropdown button
+                Create Service
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#villa">Villa</a></li>
-                <li><a class="dropdown-item" href="#house">House</a></li>
-                <li><a class="dropdown-item" href="#room">Room</a></li>
+                <li>
+                    <button type="button" class="btn btn-success" style="width: 100%" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalVilla">
+                        Villa
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-info" style="width: 100%" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalHouse">
+                        House
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-secondary" style="width: 100%" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalRoom">
+                        Room
+                    </button>
+                </li>
             </ul>
         </div>
-        <div>
-        <a  data-bs-toggle="modal" data-bs-target="#myModalCreateVilla" id="villa">
-            <div class="modal " id="myModalCreateVilla">
-                <div class="modal-dialog">
-                    <div class="modal-content">
 
-                        <div class="modal-header bg-danger">
-                            <h1 class="modal-title text-light m-auto">Create new Villa</h1>
+        <div class="modal fade" id="exampleModalVilla" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLabelVilla">Service</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="h3 text-warning fw-bold">Do you want create new Villa ?</p>
+                        <input type="hidden" name="action" readonly>
+                        <div>
+                            <div>
+                                <b> Name : </b>
+                                <input type="text" name="name">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Area :</b>
+                                <input type="text" name="area">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Cost :</b>
+                                <input type="text" name="cost">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Max people :</b>
+                                <input type="text" name="max_people">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Rent Type :</b>
+                                <input type="text" name="rent_type">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Standard_room :</b>
+                                <input type="text" name="standard_room">
+                            </div>
+                            <div>
+                                <b>Convenience :</b>
+                                <input type="text" name="description_other_convenience">
+                            </div>
+                            <br>
+                            <div>
+                                <b>Pool_area :</b>
+                                <input type="text" name="pool_area">
+                            </div>
+                            <br>
+                            <div>
+                                <b>Number_of_floors :</b>
+                                <input type="text" name="number_of_floors">
+                            </div>
                         </div>
-                        <form action="/furama" method="post">
-                            <div class="modal-body">
-                                <p class="h3 text-warning fw-bold">Do you want new Villa ?</p>
-                                <input type="hidden" name="action" readonly>
-                                <div>
-                                    <div>
-                                        <b> Name :</b>
-                                        <input type="text" name="name">
-                                    </div>
-                                    <div>
-                                        <b> Area :</b>
-                                        <input type="text" name="area">
-                                    </div>
-                                    <div>
-                                        <b> Cost :</b>
-                                        <input type="text" name="cost">
-                                    </div>
-                                    <div>
-                                        <b> Max people :</b>
-                                        <input type="text" name="max_people">
-                                    </div>
-                                    <div>
-                                        <b> Rent Type :</b>
-                                        <input type="text" name="rent_type">
-                                    </div>
-                                    <div>
-                                        <b> Standard_room :</b>
-                                        <input type="text" name="standard_room">
-                                    </div>
-                                    <div>
-                                        <b>Description_other_convenience :</b>
-                                        <input type="text" name="description_other_convenience">
-                                    </div>
-                                    <div>
-                                        <b>Pool_area :</b>
-                                        <input type="text" name="pool_area">
-                                    </div>
-                                    <div>
-                                        <b>Number_of_floors :</b>
-                                        <input type="text" name="number_of_floors">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button class="btn btn-success" type="submit">Accept</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                </button>
-                            </div>
-                        </form>
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
-        </a>
-
         </div>
-        <div>
-        <a  data-bs-toggle="modal" data-bs-target="#myModalCreateVilla" id="house">
-            <div class="modal " id="myModalCreateHouse">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <div class="modal-header bg-danger">
-                            <h1 class="modal-title text-light m-auto">Create new House</h1>
+        <div class="modal fade" id="exampleModalHouse" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLabelHouse">Service</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="h3 text-warning fw-bold">Do you want create House ?</p>
+                        <input type="hidden" name="action" readonly>
+                        <div>
+                            <div>
+                                <b> Name : </b>
+                                <input type="text" name="name">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Area :</b>
+                                <input type="text" name="area">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Cost :</b>
+                                <input type="text" name="cost">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Max people :</b>
+                                <input type="text" name="max_people">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Rent Type :</b>
+                                <input type="text" name="rent_type">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Standard_room :</b>
+                                <input type="text" name="standard_room">
+                            </div>
+                            <br>
+                            <div>
+                                <b>Convenience :</b>
+                                <input type="text" name="description_other_convenience">
+                            </div>
+                            <br>
+                            <div>
+                                <b>Number_of_floors :</b>
+                                <input type="text" name="number_of_floors">
+                            </div>
+                            <br>
                         </div>
-                        <form action="/furama" method="post">
-                            <div class="modal-body">
-                                <p class="h3 text-warning fw-bold">Do you want new house ?</p>
-                                <div >
-                                    <div>
-                                        <b> Name :</b>
-                                        <input type="text" name="name">
-                                    </div>
-                                    <div>
-                                        <b> Area :</b>
-                                        <input type="text" name="area">
-                                    </div>
-                                    <div>
-                                        <b> Cost :</b>
-                                        <input type="text" name="cost">
-                                    </div>
-                                    <div>
-                                        <b> Max people :</b>
-                                        <input type="text" name="max_people">
-                                    </div>
-                                    <div>
-                                        <b> Rent Type :</b>
-                                        <input type="text" name="rent_type">
-                                    </div>
-                                    <div>
-                                        <b> Standard_room :</b>
-                                        <input type="text" name="standard_room">
-                                    </div>
-                                    <div>
-                                        <b>Description_other_convenience :</b>
-                                        <input type="text" name="description_other_convenience">
-                                    </div>
-                                    <div>
-                                        <b>Number_of_floors :</b>
-                                        <input type="text" name="number_of_floors">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button class="btn btn-success" type="submit">Accept</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                </button>
-                            </div>
-                        </form>
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
-        </a>
-
         </div>
-        <div>
-        <a  data-bs-toggle="modal" data-bs-target="#myModalCreateVilla" id="room">
-            <div class="modal " id="myModalCreateRoom">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <div class="modal-header bg-danger">
-                            <h1 class="modal-title text-light m-auto">Create new room</h1>
+        <div class="modal fade" id="exampleModalRoom" tabindex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelRoom">Service</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="h3 text-warning fw-bold">Do you want create Room ?</p>
+                        <input type="hidden" name="action" readonly>
+                        <div>
+                            <div>
+                                <b> Name : </b>
+                                <input type="text" name="name">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Area :</b>
+                                <input type="text" name="area">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Cost :</b>
+                                <input type="text" name="cost">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Max people :</b>
+                                <input type="text" name="max_people">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Rent Type :</b>
+                                <input type="text" name="rent_type">
+                            </div>
+                            <br>
+                            <div>
+                                <b> Facility_free :</b>
+                                <input type="text" name="facility_free">
+                            </div>
+                            <br>
                         </div>
-                        <form action="/furama" method="post">
-                            <div class="modal-body">
-                                <p class="h3 text-warning fw-bold">Do you want new room?</p>
-                                <div >
-                                    <div>
-                                        <b> Name :</b>
-                                        <input type="text" name="name">
-                                    </div>
-                                    <div>
-                                        <b> Area :</b>
-                                        <input type="text" name="area">
-                                    </div>
-                                    <div>
-                                        <b> Cost :</b>
-                                        <input type="text" name="cost">
-                                    </div>
-                                    <div>
-                                        <b> Max people :</b>
-                                        <input type="text" name="max_people">
-                                    </div>
-                                    <div>
-                                        <b> Rent Type :</b>
-                                        <input type="text" name="rent_type">
-                                    </div>
-                                    <div>
-                                        <b> Standard_room :</b>
-                                        <input type="text" name="standard_room">
-                                    </div>
-                                    <div>
-                                        <b>Description_other_convenience :</b>
-                                        <input type="text" name="description_other_convenience">
-                                    </div>
-                                    <div>
-                                        <b>Number_of_floors :</b>
-                                        <input type="text" name="number_of_floors">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button class="btn btn-success" type="submit">Accept</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                </button>
-                            </div>
-                        </form>
+                        <br>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
-        </a>
+        </div>
+        <div class="container my-5">
+            <footer class="text-center text-white" style="background-color: #caced1;">
+                <div class="container p-4">
+                    <section class="">
+                        <div class="row">
+                            <div class="col-lg-2 ">
+                                <div
+                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                        data-ripple-color="light"
+                                >
+                                    <img
+                                            src="https://mdbootstrap.com/img/new/fluid/city/113.jpg"
+                                            class="w-100"
+                                    />
+                                    <a href="#!">
+                                        <div
+                                                class="mask"
+                                                style="background-color: rgba(251, 251, 251, 0.2);"
+                                        ></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 ">
+                                <div
+                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                        data-ripple-color="light"
+                                >
+                                    <img
+                                            src="https://mdbootstrap.com/img/new/fluid/city/111.jpg"
+                                            class="w-100"
+                                    />
+                                    <a href="#!">
+                                        <div
+                                                class="mask"
+                                                style="background-color: rgba(251, 251, 251, 0.2);"
+                                        ></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div
+                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                        data-ripple-color="light"
+                                >
+                                    <img
+                                            src="https://mdbootstrap.com/img/new/fluid/city/112.jpg"
+                                            class="w-100"
+                                    />
+                                    <a href="#!">
+                                        <div
+                                                class="mask"
+                                                style="background-color: rgba(251, 251, 251, 0.2);"
+                                        ></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div
+                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                        data-ripple-color="light"
+                                >
+                                    <img
+                                            src="https://mdbootstrap.com/img/new/fluid/city/114.jpg"
+                                            class="w-100"
+                                    />
+                                    <a href="#!">
+                                        <div
+                                                class="mask"
+                                                style="background-color: rgba(251, 251, 251, 0.2);"
+                                        ></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 ">
+                                <div
+                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                        data-ripple-color="light"
+                                >
+                                    <img
+                                            src="https://mdbootstrap.com/img/new/fluid/city/115.jpg"
+                                            class="w-100"
+                                    />
+                                    <a href="#!">
+                                        <div
+                                                class="mask"
+                                                style="background-color: rgba(251, 251, 251, 0.2);"
+                                        ></div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 ">
+                                <div
+                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
+                                        data-ripple-color="light"
+                                >
+                                    <img
+                                            src="https://mdbootstrap.com/img/new/fluid/city/116.jpg"
+                                            class="w-100"
+                                    />
+                                    <a href="#!">
+                                        <div
+                                                class="mask"
+                                                style="background-color: rgba(251, 251, 251, 0.2);"
+                                        ></div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
+                </div>
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                    © 2020 Copyright:
+                    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                </div>
+            </footer>
 
         </div>
-
     </form>
-
 </div>
 <script src="../style/jquery/jquery-3.5.1.min.js"></script>
 <script src="../style/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../style/datatables/js/dataTables.bootstrap4.min.js"></script>
 <script src="../style/bootstrap/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
