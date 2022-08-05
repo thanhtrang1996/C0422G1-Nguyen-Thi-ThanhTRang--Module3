@@ -22,11 +22,10 @@
 
 <form action="/employee?action=create" method="post">
 
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-            data-bs-toggle="dropdown" aria-expanded="false">
-        Update Employee
+    <button type="button" data-bs-toggle="modal"
+            data-bs-target="#exampleModalEmployee">
+        Create Employee
     </button>
-
     <div class="modal fade" id="exampleModalEmployee" tabindex="-1" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
