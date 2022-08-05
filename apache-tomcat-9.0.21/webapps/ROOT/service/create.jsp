@@ -24,212 +24,60 @@
 <div class="container">
     <%@ include file="../include/header.jsp" %>
     <form action="/furama?action=create" method="post">
-        <div class="dropdown">
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                Create Service
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li>
-                    <button type="button" class="btn btn-success" style="width: 100%" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalVilla">
-                        Villa
-                    </button>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-info" style="width: 100%" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalHouse">
-                        House
-                    </button>
-                </li>
-                <li>
-                    <button type="button" class="btn btn-secondary" style="width: 100%" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalRoom">
-                        Room
-                    </button>
-                </li>
-            </ul>
+        <div class="mb-3">
+            <select onchange="choose()" id="select">
+                <option >Choose Create new Service</option>
+                <option value="villa">Villa</option>
+                <option value="house">House</option>
+                <option value="room">Room</option>
+            </select>
         </div>
 
-        <div class="modal fade" id="exampleModalVilla" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title" id="exampleModalLabelVilla">Service</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="h3 text-warning fw-bold">Do you want create new Villa ?</p>
-                        <input type="hidden" name="action" readonly>
-                        <div>
-                            <div>
-                                <b> Name : </b>
-                                <input type="text" name="name">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Area :</b>
-                                <input type="text" name="area">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Cost :</b>
-                                <input type="text" name="cost">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Max people :</b>
-                                <input type="text" name="max_people">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Rent Type :</b>
-                                <input type="text" name="rent_type">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Standard_room :</b>
-                                <input type="text" name="standard_room">
-                            </div>
-                            <div>
-                                <b>Convenience :</b>
-                                <input type="text" name="description_other_convenience">
-                            </div>
-                            <br>
-                            <div>
-                                <b>Pool_area :</b>
-                                <input type="text" name="pool_area">
-                            </div>
-                            <br>
-                            <div>
-                                <b>Number_of_floors :</b>
-                                <input type="text" name="number_of_floors">
-                            </div>
-                        </div>
-                        <br>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name :</label>
+            <input type="text" class="form-control" id="name" >
         </div>
-        <div class="modal fade" id="exampleModalHouse" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title" id="exampleModalLabelHouse">Service</h2>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="h3 text-warning fw-bold">Do you want create House ?</p>
-                        <input type="hidden" name="action" readonly>
-                        <div>
-                            <div>
-                                <b> Name : </b>
-                                <input type="text" name="name">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Area :</b>
-                                <input type="text" name="area">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Cost :</b>
-                                <input type="text" name="cost">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Max people :</b>
-                                <input type="text" name="max_people">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Rent Type :</b>
-                                <input type="text" name="rent_type">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Standard_room :</b>
-                                <input type="text" name="standard_room">
-                            </div>
-                            <br>
-                            <div>
-                                <b>Convenience :</b>
-                                <input type="text" name="description_other_convenience">
-                            </div>
-                            <br>
-                            <div>
-                                <b>Number_of_floors :</b>
-                                <input type="text" name="number_of_floors">
-                            </div>
-                            <br>
-                        </div>
-                        <br>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
+        <div class="mb-3">
+            <label for="area" class="form-label">Area :</label>
+            <input type="text" class="form-control" id="area" >
         </div>
-        <div class="modal fade" id="exampleModalRoom" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabelRoom">Service</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="h3 text-warning fw-bold">Do you want create Room ?</p>
-                        <input type="hidden" name="action" readonly>
-                        <div>
-                            <div>
-                                <b> Name : </b>
-                                <input type="text" name="name">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Area :</b>
-                                <input type="text" name="area">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Cost :</b>
-                                <input type="text" name="cost">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Max people :</b>
-                                <input type="text" name="max_people">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Rent Type :</b>
-                                <input type="text" name="rent_type">
-                            </div>
-                            <br>
-                            <div>
-                                <b> Facility_free :</b>
-                                <input type="text" name="facility_free">
-                            </div>
-                            <br>
-                        </div>
-                        <br>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
+        <div class="mb-3">
+            <label for="cost" class="form-label">Cost</label>
+            <input type="text" class="form-control" id="cost" >
         </div>
+        <div class="mb-3">
+            <label for="max" class="form-label"> Max people</label>
+            <input type="text" class="form-control" id="max" >
+        </div>
+        <div class="mb-3">
+            <label for="rent_type" class="form-label">Rent Type</label>
+            <input type="text" class="form-control" id="rent_type" >
+        </div>
+        <div class="mb-3" id ="add" style="display: none">
+            <label for="standard_room" class="form-label">Standard_room :</label>
+            <input type="text" class="form-control" id="standard_room" >
+        </div>
+        <div class="mb-3" id ="add1" style="display: none">
+            <label for="convenience" class="form-label">Convenience :</label>
+            <input type="email" class="form-control" id="convenience">
+        </div>
+        <div class="mb-3" id="add2"style="display: none" >
+            <label for="pool_area" class="form-label">Pool_area :</label>
+            <input type="email" class="form-control" id="pool_area" >
+        </div>
+        <div class="mb-3" id ="add3"style="display: none">
+            <label for="floors" class="form-label">Number_of_floors :</label>
+            <input type="email" class="form-control" id="floors" >
+        </div>
+        <div class="mb-3" id="add4"style="display: none">
+            <label for="facility" class="form-label">Facility_free :</label>
+            <input type="email" class="form-control" id="facility" >
+        </div>
+<div>
+    <button class="btn btn-success" type="submit">Accept</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+    </button>
+</div>
         <div class="container my-5">
             <footer class="text-center text-white" style="background-color: #caced1;">
                 <div class="container p-4">
@@ -350,6 +198,31 @@
         </div>
     </form>
 </div>
+<script>
+    function choose(){
+        let result = document.getElementById("select").value;
+        switch (result) {
+            case "room":
+                document.getElementById("add").style.display = "none";
+                document.getElementById("add1").style.display = "none";
+                document.getElementById("add2").style.display = "none";
+                document.getElementById("add3").style.display = "none";
+                document.getElementById("add4").style.display = "block";
+            case "house":
+                document.getElementById("add").style.display = "block";
+                document.getElementById("add1").style.display = "block";
+                document.getElementById("add2").style.display = "none";
+                document.getElementById("add3").style.display = "block";
+                document.getElementById("add4").style.display = "none";
+            case "villa":
+                document.getElementById("add").style.display = "block";
+                document.getElementById("add1").style.display = "block";
+                document.getElementById("add2").style.display = "block";
+                document.getElementById("add3").style.display = "block";
+                document.getElementById("add4").style.display = "none";
+        }
+    }
+</script>
 <script src="../style/jquery/jquery-3.5.1.min.js"></script>
 <script src="../style/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../style/datatables/js/dataTables.bootstrap4.min.js"></script>

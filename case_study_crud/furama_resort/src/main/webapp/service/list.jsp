@@ -49,7 +49,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input  name="deleteName" id="deleteName">
+                            <input type="hidden" name="deleteName" id="deleteName">
                             <span>Bạn có muốn xóa khong: </span>
                         </div>
                         <div class="modal-footer">
@@ -84,12 +84,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input  name="deleteName" id="deleteName1">
+                            <input type="hidden" name="deleteName" id="deleteName1">
                             <span>Bạn có muốn xóa khong: </span>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Delete</button>
+                            <button type="submit" id="confirm" class="btn btn-primary"></button>
                         </div>
                     </div>
                 </form>
@@ -97,7 +97,7 @@
         </div>
             <script>
                 function showInfoDelete(name) {
-                    document.getElementById("deleteName").innerText=name;
+                    document.getElementById("confirm").innerHTML="<a href='/furama?action=delete&name="+name+"'>delete</a>";
                 }
             </script></td>
     </tr>
@@ -119,12 +119,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input  name="deleteName" id="deleteName2">
+                            <input type="hidden" name="deleteName" id="deleteName2">
                             <span>Bạn có muốn xóa khong: </span>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Delete</button>
+                            <button type="submit" class="btn btn-primary" id ="confirm1"></button>
                         </div>
                     </div>
                 </form>
@@ -132,9 +132,10 @@
         </div>
             <script>
                 function showInfoDelete(name) {
-                    document.getElementById("deleteName").innerText=name;
+                    document.getElementById("confirm").innerHTML="<a href='/furama?action=delete&name="+name+"'>delete</a>";
                 }
-            </script></td>
+            </script>
+        </td>
     </tr>
 
     </tbody>
