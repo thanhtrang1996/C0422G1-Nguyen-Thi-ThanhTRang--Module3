@@ -22,25 +22,202 @@
 <body>
 <div class="container">
     <form action="/furama?action=create" method="post">
-        <div>
-            <b> Name :</b>
-            <input type="text" name="name">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown button
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#villa">Villa</a></li>
+                <li><a class="dropdown-item" href="#house">House</a></li>
+                <li><a class="dropdown-item" href="#room">Room</a></li>
+            </ul>
         </div>
         <div>
-            <b> Area :</b>
-            <input type="text" name="area">
+        <a  data-bs-toggle="modal" data-bs-target="#myModalCreateVilla" id="villa">
+            <div class="modal " id="myModalCreateVilla">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header bg-danger">
+                            <h1 class="modal-title text-light m-auto">Create new Villa</h1>
+                        </div>
+                        <form action="/furama" method="post">
+                            <div class="modal-body">
+                                <p class="h3 text-warning fw-bold">Do you want new Villa ?</p>
+                                <input type="hidden" name="action" readonly>
+                                <div>
+                                    <div>
+                                        <b> Name :</b>
+                                        <input type="text" name="name">
+                                    </div>
+                                    <div>
+                                        <b> Area :</b>
+                                        <input type="text" name="area">
+                                    </div>
+                                    <div>
+                                        <b> Cost :</b>
+                                        <input type="text" name="cost">
+                                    </div>
+                                    <div>
+                                        <b> Max people :</b>
+                                        <input type="text" name="max_people">
+                                    </div>
+                                    <div>
+                                        <b> Rent Type :</b>
+                                        <input type="text" name="rent_type">
+                                    </div>
+                                    <div>
+                                        <b> Standard_room :</b>
+                                        <input type="text" name="standard_room">
+                                    </div>
+                                    <div>
+                                        <b>Description_other_convenience :</b>
+                                        <input type="text" name="description_other_convenience">
+                                    </div>
+                                    <div>
+                                        <b>Pool_area :</b>
+                                        <input type="text" name="pool_area">
+                                    </div>
+                                    <div>
+                                        <b>Number_of_floors :</b>
+                                        <input type="text" name="number_of_floors">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-success" type="submit">Accept</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </a>
+
         </div>
         <div>
-            <b> Cost :</b>
-            <input type="text" name="cost">
+        <a  data-bs-toggle="modal" data-bs-target="#myModalCreateVilla" id="house">
+            <div class="modal " id="myModalCreateHouse">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header bg-danger">
+                            <h1 class="modal-title text-light m-auto">Create new House</h1>
+                        </div>
+                        <form action="/furama" method="post">
+                            <div class="modal-body">
+                                <p class="h3 text-warning fw-bold">Do you want new house ?</p>
+                                <div >
+                                    <div>
+                                        <b> Name :</b>
+                                        <input type="text" name="name">
+                                    </div>
+                                    <div>
+                                        <b> Area :</b>
+                                        <input type="text" name="area">
+                                    </div>
+                                    <div>
+                                        <b> Cost :</b>
+                                        <input type="text" name="cost">
+                                    </div>
+                                    <div>
+                                        <b> Max people :</b>
+                                        <input type="text" name="max_people">
+                                    </div>
+                                    <div>
+                                        <b> Rent Type :</b>
+                                        <input type="text" name="rent_type">
+                                    </div>
+                                    <div>
+                                        <b> Standard_room :</b>
+                                        <input type="text" name="standard_room">
+                                    </div>
+                                    <div>
+                                        <b>Description_other_convenience :</b>
+                                        <input type="text" name="description_other_convenience">
+                                    </div>
+                                    <div>
+                                        <b>Number_of_floors :</b>
+                                        <input type="text" name="number_of_floors">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-success" type="submit">Accept</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </a>
+
         </div>
         <div>
-            <b> Max people :</b>
-            <input type="text" name="max_people">
-        </div>
-        <div>
-            <b> Rent Type :</b>
-            <input type="text" name="rent_type">
+        <a  data-bs-toggle="modal" data-bs-target="#myModalCreateVilla" id="room">
+            <div class="modal " id="myModalCreateRoom">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header bg-danger">
+                            <h1 class="modal-title text-light m-auto">Create new room</h1>
+                        </div>
+                        <form action="/furama" method="post">
+                            <div class="modal-body">
+                                <p class="h3 text-warning fw-bold">Do you want new room?</p>
+                                <div >
+                                    <div>
+                                        <b> Name :</b>
+                                        <input type="text" name="name">
+                                    </div>
+                                    <div>
+                                        <b> Area :</b>
+                                        <input type="text" name="area">
+                                    </div>
+                                    <div>
+                                        <b> Cost :</b>
+                                        <input type="text" name="cost">
+                                    </div>
+                                    <div>
+                                        <b> Max people :</b>
+                                        <input type="text" name="max_people">
+                                    </div>
+                                    <div>
+                                        <b> Rent Type :</b>
+                                        <input type="text" name="rent_type">
+                                    </div>
+                                    <div>
+                                        <b> Standard_room :</b>
+                                        <input type="text" name="standard_room">
+                                    </div>
+                                    <div>
+                                        <b>Description_other_convenience :</b>
+                                        <input type="text" name="description_other_convenience">
+                                    </div>
+                                    <div>
+                                        <b>Number_of_floors :</b>
+                                        <input type="text" name="number_of_floors">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-success" type="submit">Accept</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+
         </div>
 
     </form>
