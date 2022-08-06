@@ -43,8 +43,6 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/employee">List Employee</a></li>
-                        <li><a class="dropdown-item" href="/employee?action=create"> Create Employee</a></li>
-                        <li><a class="dropdown-item" href="/employee?action=update"> Update Employee</a></li>
                     </ul>
                 </li>  <li class="nav-item dropdown">
                     <a class="navbar-brand dropdown-toggle" href="#" id="navbarCustomer" role="button"
@@ -54,7 +52,7 @@
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="/customer">List Customer</a></li>
                         <li><a class="dropdown-item" href="/customer?action=create"> Create Customer</a></li>
-                        <li><a class="dropdown-item" href="/customer?action=update"> Update Customer</a></li>
+
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -63,14 +61,19 @@
                         Service
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/furama">List Service</a></li>
-                        <li><a class="dropdown-item" href="/furama?action=create"> Create Service</a></li>
-                        <li><a class="dropdown-item" href="/furama?action=update"> Update Service</a></li>
+                        <li><a class="dropdown-item" href="/facility">List Service</a></li>
+                        <li><a class="dropdown-item" href="/facility?action=create"> Create Service</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="navbar-brand disabled" href="#" tabindex="-1"
-                       aria-disabled="true">Contract</a>
+                <li class="nav-item dropdown">
+                    <a class="navbar-brand dropdown-toggle" href="#" id="navbarContract" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Contract
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/contract">List Contract</a></li>
+                        <li><a class="dropdown-item" href="/contract?action=create"> Create Contract</a></li>
+                    </ul>
                 </li>
             </ul>
             <form class="d-flex">

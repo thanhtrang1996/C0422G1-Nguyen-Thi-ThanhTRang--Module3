@@ -36,11 +36,11 @@ CREATE TABLE nhan_vien (
     ma_bo_phan INT NOT NULL,
     `status` bit(1) default 0,
     FOREIGN KEY (ma_vi_tri)
-        REFERENCES vi_tri (ma_vi_tri),
+        REFERENCES vi_tri (ma_vi_tri)ON DELETE CASCADE,
     FOREIGN KEY (ma_trinh_do)
-        REFERENCES trinh_do (ma_trinh_do),
+        REFERENCES trinh_do (ma_trinh_do)ON DELETE CASCADE,
     FOREIGN KEY (ma_bo_phan)
-        REFERENCES bo_phan (ma_bo_phan)
+        REFERENCES bo_phan (ma_bo_phan)ON DELETE CASCADE
 );
 
 
@@ -63,7 +63,7 @@ CREATE TABLE khach_hang (
     dia_chi VARCHAR(45) NOT NULL,
      `status` bit(1) default 0,
     FOREIGN KEY (ma_loai_khach)
-        REFERENCES loai_khach (ma_loai_khach)
+        REFERENCES loai_khach (ma_loai_khach)ON DELETE CASCADE
 );
 
 
@@ -93,9 +93,9 @@ CREATE TABLE dich_vu (
     ma_kieu_thue INT NOT NULL,
     ma_loai_dich_vu INT NOT NULL,
     FOREIGN KEY (ma_loai_dich_vu)
-        REFERENCES loai_dich_vu (ma_loai_dich_vu),
+        REFERENCES loai_dich_vu (ma_loai_dich_vu)ON DELETE CASCADE,
     FOREIGN KEY (ma_kieu_thue)
-        REFERENCES kieu_thue (ma_kieu_thue)
+        REFERENCES kieu_thue (ma_kieu_thue)ON DELETE CASCADE
 );
 
 CREATE TABLE hop_dong (
@@ -107,11 +107,11 @@ CREATE TABLE hop_dong (
     ma_khach_hang INT NOT NULL,
     ma_dich_vu INT NOT NULL,
     FOREIGN KEY (ma_nhan_vien)
-        REFERENCES nhan_vien (ma_nhan_vien),
+        REFERENCES nhan_vien (ma_nhan_vien) ON DELETE CASCADE,
     FOREIGN KEY (ma_khach_hang)
-        REFERENCES khach_hang (ma_khach_hang),
+        REFERENCES khach_hang (ma_khach_hang) ON DELETE CASCADE,
     FOREIGN KEY (ma_dich_vu)
-        REFERENCES dich_vu (ma_dich_vu)
+        REFERENCES dich_vu (ma_dich_vu) ON DELETE CASCADE
 );
 
 
@@ -130,9 +130,9 @@ CREATE TABLE hop_dong_chi_tiet (
     ma_hop_dong INT NOT NULL,
     ma_dich_vu_di_kem INT NOT NULL,
     FOREIGN KEY (ma_hop_dong)
-        REFERENCES hop_dong (ma_hop_dong),
+        REFERENCES hop_dong (ma_hop_dong)ON DELETE CASCADE,
     FOREIGN KEY (ma_dich_vu_di_kem)
-        REFERENCES dich_vu_di_kem (ma_dich_vu_di_kem)
+        REFERENCES dich_vu_di_kem (ma_dich_vu_di_kem)ON DELETE CASCADE
 );
 
 insert into vi_tri (ten_vi_tri)

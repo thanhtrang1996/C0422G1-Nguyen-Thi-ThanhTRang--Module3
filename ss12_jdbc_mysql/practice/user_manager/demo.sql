@@ -40,14 +40,15 @@ delimiter ;
 call get_all_user();
 
 delimiter $$
-create procedure get_user_by_id(in user_id int)
+create procedure get_user_by_id(in id1 int)
 begin 
-	select users.user, users.`name`,users.email,users.country
-	from users
-	where user_id = users.user_id;
+	select *
+	from `users`
+	where user_id = id1;
 	end$$
 delimiter ;
 
+call get_user_by_id(2);
 delimiter $$
 create procedure insert_user(
 	in user_name varchar(255),
@@ -74,7 +75,7 @@ call insert_permision('Master');
 insert into permision(name) values("add"),("edit"),("delete"),("view");
 
 delimiter $$
-create procedure update_user (id int, name1 varchar(255), email1 varchar(255),country1 varchar(255))
+create procedure update_user ( in id int, name1 varchar(255), email1 varchar(255),country1 varchar(255))
 begin 
 update users 
 set  `name` = name1, email = email1, country = country1

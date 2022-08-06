@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Gia Nguyen Store
@@ -25,171 +26,56 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Name Customer:</label>
-            <input type="text" class="form-control" id="name" >
+            <input type="text" class="form-control" id="name" name="name">
         </div>
         <div class="mb-3">
             <label for="birthday" class="form-label">Birthday :</label>
-            <input type="text" class="form-control" id="birthday" >
+            <input type="date" class="form-control" id="birthday" name ="dateOfBirth">
         </div>
         <div class="mb-3">
             <label for="gender" class="form-label">Gender :</label>
-            <input type="text" class="form-control" id="gender" >
+           <div> <select id="gender" name="gender" class="form-control">
+                <option>Choose Gender</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+           </div>
         </div>
         <div class="mb-3">
             <label for="id_card" class="form-label"> Id_card :</label>
-            <input type="text" class="form-control" id="id_card" >
+            <input type="text" class="form-control" id="id_card" name="idCard">
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Phone :</label>
-            <input type="text" class="form-control" id="phone" >
+            <input type="text" class="form-control" id="phone" name = "phoneNumber">
         </div>
-        <div class="mb-3" >
+        <div class="mb-3">
             <label for="email" class="form-label">email :</label>
-            <input type="text" class="form-control" id="email" >
+            <input type="text" class="form-control" id="email" name="email">
         </div>
-        <div class="mb-3" >
+        <div class="mb-3">
             <label for="customer_type" class="form-label">Customer_type :</label>
-            <div class="mb-3 row">
-                  <select  id ="customer_type">
-                    <option >Choose Customer Type</option>
-                    <option>Diamond</option>
-                    <option>Platinum</option>
-                    <option >Gold</option>
-                    <option >Silver</option>
-                    <option >Member</option>
+            <div class="mb-3 " >
+                <select id="customer_type" class="form-control" name="customerTypeId">
+                    <option selected disabled>Choose Customer Type</option>
+                    <c:forEach items="${customerTypeList}" var="customerType">
+                        <option value="${customerType.id}">${customerType.nameCustomerType}</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
-        <div class="mb-3"  >
+        <div class="mb-3">
             <label for="address" class="form-label">Address :</label>
-            <input type="email" class="form-control" id="address" >
+            <input type="text" class="form-control" id="address" name="address">
         </div>
-       <div>
-           <button class="btn btn-success" type="submit">Accept</button>
-           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-           </button>
-       </div>
-
-        <div class="container my-5">
-            <footer class="text-center text-white" style="background-color: #caced1;">
-                <div class="container p-4">
-                    <section class="">
-                        <div class="row">
-                            <div class="col-lg-2 ">
-                                <div
-                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                        data-ripple-color="light"
-                                >
-                                    <img
-                                            src="https://mdbootstrap.com/img/new/fluid/city/113.jpg"
-                                            class="w-100"
-                                    />
-                                    <a href="#!">
-                                        <div
-                                                class="mask"
-                                                style="background-color: rgba(251, 251, 251, 0.2);"
-                                        ></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 ">
-                                <div
-                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                        data-ripple-color="light"
-                                >
-                                    <img
-                                            src="https://mdbootstrap.com/img/new/fluid/city/111.jpg"
-                                            class="w-100"
-                                    />
-                                    <a href="#!">
-                                        <div
-                                                class="mask"
-                                                style="background-color: rgba(251, 251, 251, 0.2);"
-                                        ></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div
-                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                        data-ripple-color="light"
-                                >
-                                    <img
-                                            src="https://mdbootstrap.com/img/new/fluid/city/112.jpg"
-                                            class="w-100"
-                                    />
-                                    <a href="#!">
-                                        <div
-                                                class="mask"
-                                                style="background-color: rgba(251, 251, 251, 0.2);"
-                                        ></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div
-                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                        data-ripple-color="light"
-                                >
-                                    <img
-                                            src="https://mdbootstrap.com/img/new/fluid/city/114.jpg"
-                                            class="w-100"
-                                    />
-                                    <a href="#!">
-                                        <div
-                                                class="mask"
-                                                style="background-color: rgba(251, 251, 251, 0.2);"
-                                        ></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 ">
-                                <div
-                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                        data-ripple-color="light"
-                                >
-                                    <img
-                                            src="https://mdbootstrap.com/img/new/fluid/city/115.jpg"
-                                            class="w-100"
-                                    />
-                                    <a href="#!">
-                                        <div
-                                                class="mask"
-                                                style="background-color: rgba(251, 251, 251, 0.2);"
-                                        ></div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-2 ">
-                                <div
-                                        class="bg-image hover-overlay ripple shadow-1-strong rounded"
-                                        data-ripple-color="light"
-                                >
-                                    <img
-                                            src="https://mdbootstrap.com/img/new/fluid/city/116.jpg"
-                                            class="w-100"
-                                    />
-                                    <a href="#!">
-                                        <div
-                                                class="mask"
-                                                style="background-color: rgba(251, 251, 251, 0.2);"
-                                        ></div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                </div>
-                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-                    © 2020 Copyright:
-                    <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-                </div>
-            </footer>
-
+        <div>
+            <button class="btn btn-success" type="submit">Accept</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+            </button>
         </div>
     </form>
 </div>
+<%@include file="../include/footer.jsp" %>
 <script src="../style/jquery/jquery-3.5.1.min.js"></script>
 <script src="../style/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../style/datatables/js/dataTables.bootstrap4.min.js"></script>

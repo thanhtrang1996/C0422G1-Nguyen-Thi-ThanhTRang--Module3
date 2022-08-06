@@ -1,63 +1,121 @@
 package controller;
 
+import model.Customer;
+import model.CustomerType;
+import service.ICustomerService;
+import service.ICustomerTypeService;
+import service.impl.CustomerService;
+import service.impl.CustomerTypeService;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "CustomerServlet", value = "/customer")
 public class CustomerServlet extends HttpServlet {
+    private ICustomerService customerService = new CustomerService();
+    private ICustomerTypeService customerTypeService = new CustomerTypeService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String action = request.getParameter("action");
-        if (action == null) {
-            action ="";
-        }switch (action){
-            case "create":
-                showCreateCustomer(request,response);
-                break;
-            case "update":
-                showUpdateCustomer(request,response);
-                break;
-            default:
-                listCustomer(request,response);
-                break;
-        }
-    }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
         }
-        switch (action){
+        switch (action) {
             case "create":
-                createCustoer(request,response);
+                showCreateCustomer(request, response);
                 break;
             case "update":
-                updateCustomer(request,response);
+                showUpdateCustomer(request, response);
+                break;
+            case "delete":
+                deleteCustomer(request, response);
+                break;
+            default:
+                listCustomer(request, response);
+                break;
+        }
+    }
+
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String id = request.getParameter("id");
+        customerService.deleteCustomer(Integer.parseInt(id));
+        response.sendRedirect("/customer");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
+            case "create":
+                createCustomer(request, response);
+                break;
+            case "update":
+                updateCustomer(request, response);
                 break;
         }
 
     }
 
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("customer/listCustomer.jsp").forward(request,response);
+        List<Customer> customerList = customerService.selectAllCustomer();
+        List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
+        request.setAttribute("customer", customerList);
+        request.setAttribute("customerTypeList", customerTypeList);
+        request.getRequestDispatcher("customer/listCustomer.jsp").forward(request, response);
     }
 
     private void showUpdateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("customer/updateCustomer.jsp").forward(request,response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        Customer customer = customerService.selectCustomer(id);
+        request.setAttribute("customer", customer);
+        List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
+        request.setAttribute("customerTypeList", customerTypeList);
+        request.getRequestDispatcher("customer/updateCustomer.jsp").forward(request, response);
     }
 
     private void showCreateCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("customer/createCustomer.jsp").forward(request,response);
+        List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
+        request.setAttribute("customerTypeList", customerTypeList);
+        request.getRequestDispatcher("customer/createCustomer.jsp").forward(request, response);
     }
 
 
+    private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
+        String name = request.getParameter("name");
+        String dateOfBirth = request.getParameter("dateOfBirth");
+        Boolean gender = Boolean.valueOf(request.getParameter("gender"));
+        String idCard = request.getParameter("idCard");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        Customer customer = new Customer(id, customerTypeId, name, dateOfBirth, gender, idCard, phoneNumber, email, address);
+        customerService.updateCustomer(customer);
+        response.sendRedirect("/customer");
 
-    private void updateCustomer(HttpServletRequest request, HttpServletResponse response) {
     }
 
-    private void createCustoer(HttpServletRequest request, HttpServletResponse response) {
+    private void createCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String customerTypeId = request.getParameter("customerTypeId");
+        String name = request.getParameter("name");
+        String dateOfBirth = request.getParameter("dateOfBirth");
+        Boolean gender = Boolean.valueOf(request.getParameter("gender"));
+        String idCard = request.getParameter("idCard");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        Customer customer = new Customer(Integer.parseInt(customerTypeId), name, dateOfBirth, gender, idCard, phoneNumber, email, address);
+        List<Customer> customerList = customerService.insertCustomer(customer);
+        response.sendRedirect("/customer");
+
     }
 }
