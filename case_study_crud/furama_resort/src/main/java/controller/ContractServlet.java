@@ -17,8 +17,15 @@ public class ContractServlet extends HttpServlet {
             case "create":
                 showCreateContract(request,response);
                 break;
+            default:
+                listContract(request,response);
+                break;
         }
 
+    }
+
+    private void listContract(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("contract/contract.jsp").forward(request,response);
     }
 
     private void showCreateContract(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

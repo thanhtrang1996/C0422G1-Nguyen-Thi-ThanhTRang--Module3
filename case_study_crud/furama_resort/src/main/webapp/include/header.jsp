@@ -58,11 +58,11 @@
                 <li class="nav-item dropdown">
                     <a class="navbar-brand dropdown-toggle" href="#" id="navbarService" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Service
+                        Facility
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/facility">List Service</a></li>
-                        <li><a class="dropdown-item" href="/facility?action=create"> Create Service</a></li>
+                        <li><a class="dropdown-item" href="/facility">List Facility</a></li>
+                        <li><a class="dropdown-item" href="/facility?action=create"> Create Facility</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

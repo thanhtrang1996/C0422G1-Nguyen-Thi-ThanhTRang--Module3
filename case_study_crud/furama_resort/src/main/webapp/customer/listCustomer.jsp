@@ -65,7 +65,7 @@
                     <a href="/customer?action=update&id=${customer.id}" class="btn btn-warning">Update</a>
                 </td>
                 <td>
-                    <button onclick="showInfoDelete(${customer.id},'name')" class="btn btn-danger"
+                    <button onclick="infoToModal('${customer.id}','${customer.name}')" class="btn btn-danger"
                             type="button" data-bs-toggle="modal" data-bs-target="#deleteModal">
                         Delete
                     </button>
@@ -75,7 +75,7 @@
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
-                <form action="/customer" method="post">
+                <form action="/customer?action=delete" method="get">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h2 class="modal-title" id="exampleModalLabel">Customer</h2>
@@ -83,12 +83,13 @@
                                     aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="hidden" name="deleteId" id="deleteId">
-                            <span id="payload"></span>
+                            <input type="text" readonly name="id" id="deleteId">
+                            <input type="text" readonly name="name" id="deleteName">
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" id="confirm">Delete</button>
+                            <button type="submit" class="btn btn-primary" name="action" value="delete" >Delete</button>
                         </div>
                     </div>
                 </form>
@@ -99,10 +100,11 @@
 </div>
 <%@include file="../include/footer.jsp"%>
 <script>
-    function showInfoDelete(Id, name) {
-        document.getElementById("confirm").innerHTML = "<a href='/customer?action=delete&id=" + Id + "'>delete</a>";
-        document.getElementById("payload").innerHTML = `<span>Bạn có muốn xoá nhân viên có tên là ` + name+ ` không?</span>`
-    }
+   function infoToModal(id,name) {
+       console.log(id,name)
+       document.getElementById("deleteId").value = id;
+       document.getElementById("deleteName").value = name;
+   }
 </script>
 <script>
     $(document).ready(function () {

@@ -19,6 +19,7 @@
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
 </head>
 <body>
+<form action="/contract">
 <table class="table table-hover">
     <thead>
     <tr>
@@ -386,7 +387,7 @@
             </div>
         </div>
     </div>
-</table>
+</table></form>
 <script src="../style/jquery/jquery-3.5.1.min.js"></script>
 <script src="../style/datatables/js/jquery.dataTables.min.js"></script>
 <script src="../style/datatables/js/dataTables.bootstrap4.min.js"></script>

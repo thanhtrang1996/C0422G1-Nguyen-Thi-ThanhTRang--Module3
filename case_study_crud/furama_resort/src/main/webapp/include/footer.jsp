@@ -50,7 +50,7 @@
                 <br>
             </div>
             <div class="col-lg-6">
-                <div class="row text-primary"><b class="material-symbols-outlined">location_on</b><b>--%>
+                <div class="row text-primary"><b class="material-symbols-outlined">location_on</b><b>
                     103 – 105 Đường Võ Nguyên Giáp, Phường Khuê Mỹ, Quận Ngũ hành Sơn, Tp. Đà Nẵng, Việt Nam
                     7.0 km từ Sân bay Quốc tế Đà Nẵng</b></div>
                 <div class="row text-primary"><span class="material-symbols-outlined">phone_in_talk</span>
