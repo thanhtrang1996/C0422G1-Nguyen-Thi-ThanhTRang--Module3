@@ -1,8 +1,16 @@
 package controller;
 
 import model.Facility;
+import model.FacilityType;
+import model.RentType;
+import repository.IRentTypeRepository;
+import repository.impl.RentTypeRepository;
 import service.IFacilityService;
+import service.IFacilityTypeService;
+import service.IRentTypeService;
 import service.impl.FacilityService;
+import service.impl.FacilityTypeService;
+import service.impl.RentTypeService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -13,6 +21,8 @@ import java.util.List;
 @WebServlet(name = "FacilityServlet", value = "/facility")
 public class FacilityServlet extends HttpServlet {
     private IFacilityService facilityService = new FacilityService();
+    private IFacilityTypeService facilityTypeService = new FacilityTypeService();
+    private IRentTypeService rentTypeService = new RentTypeService();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,19 +41,16 @@ public class FacilityServlet extends HttpServlet {
             case "delete":
                 deleteFacility(request, response);
                 break;
+            case "search":
+                searchFacility(request,response);
+                break;
             default:
                 listFacility(request, response);
                 break;
         }
     }
 
-    private void deleteFacility(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Integer id = Integer.parseInt(request.getParameter("id"));
-        facilityService.deleteFacility(id);
-        response.sendRedirect("/facility");
 
-
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -64,6 +71,10 @@ public class FacilityServlet extends HttpServlet {
 
     private void listFacility(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Facility> facilityList = facilityService.selectAllFacility();
+        List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
+        List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+        request.setAttribute("facilityType",facilityTypeList);
+        request.setAttribute("rentType",rentTypeList);
         request.setAttribute("facility", facilityList);
         request.getRequestDispatcher("facility/list.jsp").forward(request, response);
     }
@@ -81,7 +92,8 @@ public class FacilityServlet extends HttpServlet {
 
 
     private void updateFacility(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String choiceFacility = request.getParameter("choiceFacility");
+        String chooseFacility = request.getParameter("chooseFacility");
+        Integer id = Integer.valueOf(request.getParameter("id"));
         String name = request.getParameter("name");
         Integer area = Integer.parseInt(request.getParameter("area"));
         Double cost = Double.parseDouble(request.getParameter("cost"));
@@ -92,17 +104,17 @@ public class FacilityServlet extends HttpServlet {
         String descriptionOtherConvenience;
         Integer numberOfFloors;
         Facility facility = null;
-        switch (choiceFacility) {
+        switch (chooseFacility) {
             case "room":
                 String facilityFree = request.getParameter("facilityFree");
-                facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId, facilityFree);
+                facility = new Facility(id, name, area, cost, maxPeople, rentTypeId, facilityTypeId, facilityFree);
                 facilityService.updateRoom(facility);
                 break;
             case "house":
                 standardRoom = request.getParameter("standardRoom");
                 descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
                 numberOfFloors = Integer.valueOf(request.getParameter("numberOfFloors"));
-                facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, numberOfFloors);
+                facility = new Facility(id, name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, numberOfFloors);
                 facilityService.updateHouse(facility);
                 break;
             case "villa":
@@ -110,7 +122,7 @@ public class FacilityServlet extends HttpServlet {
                 descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
                 numberOfFloors = Integer.valueOf(request.getParameter("numberOfFloors"));
                 Double poolArea = Double.valueOf(request.getParameter("poolArea"));
-                facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, numberOfFloors, poolArea);
+                facility = new Facility(id, name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, numberOfFloors, poolArea);
                 facilityService.updateVilla(facility);
                 break;
         }
@@ -153,5 +165,20 @@ public class FacilityServlet extends HttpServlet {
                 break;
         }
         response.sendRedirect("/facility");
+    }
+    private void searchFacility(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name= request.getParameter("name");
+        List<Facility> facilityList = facilityService.searchFacility(name);
+        request.setAttribute("facility", facilityList);
+        request.setAttribute("name", name);
+        request.getRequestDispatcher("facility/list.jsp").forward(request, response);
+    }
+
+    private void deleteFacility(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Integer id = Integer.parseInt(request.getParameter("id"));
+        facilityService.deleteFacility(id);
+        response.sendRedirect("/facility");
+
+
     }
 }

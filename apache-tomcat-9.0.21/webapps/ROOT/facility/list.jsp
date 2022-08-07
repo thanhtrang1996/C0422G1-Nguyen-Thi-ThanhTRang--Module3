@@ -5,6 +5,7 @@
   Time: 11:14 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,14 +18,14 @@
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 </head>
 <body>
 <div class="container-fluid">
     <%@ include file="../include/header.jsp" %>
     <h1>Facility List</h1>
     <a href="/facility?action=create" class="btn btn-success">Create Facility</a>
-    <table class="table table-hover" id = "myTable1">
+    <table class="table table-hover" id = "myTable">
         <thead>
         <tr>
             <th>No.</th>
@@ -51,8 +52,16 @@
                 <td>${facility.area}</td>
                 <td>${facility.cost}</td>
                 <td>${facility.maxPeople}</td>
-                <td>${facility.rentTypeId}</td>
-                <td>${facility.facilityTypeId}</td>
+                <c:forEach items="${rentType}" var="rentType">
+                    <c:if test="${rentType.id == facility.rentTypeId}">
+                        <td>${rentType.name}</td>
+                    </c:if>
+                </c:forEach>
+                <c:forEach items="${facilityType}" var="facilityType">
+                    <c:if test="${facility.id == facility.facilityTypeId}">
+                        <td>${facilityType.name}</td>
+                    </c:if>
+                </c:forEach>
                 <td>${facility. standardRoom}</td>
                 <td>${facility.descriptionOtherConvenience}</td>
                 <td>${facility.poolArea}</td>
@@ -60,52 +69,47 @@
                 <td>${facility.facilityFree}</td>
                 <td><a href="/facility?action=update&id=${facility.id}" class="btn btn-warning">Update</a></td>
                 <td>
-                    <button class="btn btn-danger"
-                            data-bs-toggle="modal"
-                            data-bs-target="#deleteModal"
-                            onclick="setIdToFormDelete('${facility.id}','${facility.name}')">
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" onclick="showMe(${facility.id}, '${facility.name}')">
                         Delete
                     </button>
                 </td>
             </tr>
         </c:forEach>
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog">
-                <form action="/customer?action=delete" method="get">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="modal-title" id="exampleModalLabel">Facility</h2>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" readonly name="id" id="deleteId">
-                            <input type="text" readonly name="name" id="deleteName">
-
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" name="action" value="delete" >Delete</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
         </tbody>
     </table>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="/facility?action=delete" method="get">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="exampleModalLabel">Facility</h2>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" readonly name="id" id="deleteId">
+                        <input type="text" readonly name="name" id="deleteName">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" name="action" value="delete" >Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-<%@include file="../include/footer.jsp" %>
 <script>
-    function showInfoDelete(id, name) {
-        document.getElementById("deleteId").value = id;
-        document.getElementById("deleteName").value = name;
+    function showMe(id, name) {
+        $('#deleteId').val(id);
+        $('#deleteName').val(name);
     }
 </script>
+<%@include file="../include/footer.jsp" %>
 <script>
     $(document).ready(function () {
-        $('#myTable1').dataTable({
+        $('#myTable').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
             "pageLength": 4

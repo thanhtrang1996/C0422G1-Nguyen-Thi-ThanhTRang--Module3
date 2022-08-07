@@ -90,6 +90,44 @@ public class Facility {
         this.poolArea = poolArea;
     }
 
+    public Facility(Integer id, String name, Integer area, Double cost, Integer maxPeople, Integer rentTypeId, Integer facilityTypeId, String facilityFree) {
+        this.id = id;
+        this.name = name;
+        this.area = area;
+        this.cost = cost;
+        this.maxPeople = maxPeople;
+        this.rentTypeId = rentTypeId;
+        this.facilityTypeId = facilityTypeId;
+        this.facilityFree = facilityFree;
+    }
+
+    public Facility(Integer id, String name, Integer area, Double cost, Integer maxPeople, Integer rentTypeId, Integer facilityTypeId, String standardRoom, String descriptionOtherConvenience, Integer numberOfFloors) {
+        this.id = id;
+        this.name = name;
+        this.area = area;
+        this.cost = cost;
+        this.maxPeople = maxPeople;
+        this.rentTypeId = rentTypeId;
+        this.facilityTypeId = facilityTypeId;
+        this.standardRoom = standardRoom;
+        this.descriptionOtherConvenience = descriptionOtherConvenience;
+        this.numberOfFloors = numberOfFloors;
+    }
+
+    public Facility(Integer id, String name, Integer area, Double cost, Integer maxPeople, Integer rentTypeId, Integer facilityTypeId, String standardRoom, String descriptionOtherConvenience, Integer numberOfFloors, Double poolArea) {
+        this.id = id;
+        this.name = name;
+        this.area = area;
+        this.cost = cost;
+        this.maxPeople = maxPeople;
+        this.rentTypeId = rentTypeId;
+        this.facilityTypeId = facilityTypeId;
+        this.standardRoom = standardRoom;
+        this.descriptionOtherConvenience = descriptionOtherConvenience;
+        this.poolArea = poolArea;
+        this.numberOfFloors = numberOfFloors;
+    }
+
 
     public Integer getId() {
         return id;

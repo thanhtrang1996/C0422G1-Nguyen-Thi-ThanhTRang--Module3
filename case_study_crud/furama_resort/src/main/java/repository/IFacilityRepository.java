@@ -8,7 +8,7 @@ public interface IFacilityRepository {
     List<Facility> selectAllFacility();
    Facility selectFacility(int id);
     boolean deleteFacility(int id);
-    List<Facility> searchFacilityByName();
+    List<Facility> searchFacilityByName(String name);
     boolean updateRoom(Facility facility);
     boolean updateHouse(Facility facility);
     boolean updateVilla(Facility facility);

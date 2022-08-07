@@ -10,7 +10,7 @@ public interface IFacilityService {
     boolean updateRoom(Facility facility);
     boolean updateHouse(Facility facility);
     boolean updateVilla(Facility facility);
-    List<Facility> searchFacility();
+    List<Facility> searchFacility(String name);
 
     void insertRoom(Facility facility);
 

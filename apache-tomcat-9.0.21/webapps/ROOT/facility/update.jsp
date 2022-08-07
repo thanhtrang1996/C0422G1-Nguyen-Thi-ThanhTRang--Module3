@@ -22,14 +22,14 @@
 <div class="container">
     <form action="/facility?action=update" method="post">
         <div class="mb-3">
-            <select onchange="choose()" id="select">
+            <select onchange="choose()" id="select" name="chooseFacility">
                 <option >Choose Update Service</option>
                 <option value="villa">Villa</option>
                 <option value="house">House</option>
                 <option value="room">Room</option>
             </select>
         </div>
-
+        <input type="hidden" name="id" value="${facility.id}">
         <div class="mb-3">
             <label for="name" class="form-label">Name :</label>
             <input type="text" class="form-control" id="name" name="name" value="${facility.name}" >

@@ -26,8 +26,8 @@ public class FacilityService implements IFacilityService {
     }
 
     @Override
-    public List<Facility> searchFacility() {
-        return null;
+    public List<Facility> searchFacility(String name) {
+        return facilityRepository.searchFacilityByName(name);
     }
 
     @Override
