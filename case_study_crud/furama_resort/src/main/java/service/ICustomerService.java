@@ -11,5 +11,7 @@ public interface ICustomerService {
     void insertCustomer(Customer customer);
     boolean deleteCustomer(int id);
     boolean updateCustomer(Customer customer);
+    List<Customer> searchByName(String keyName, String keyAddress);
+
     Map<String,String> check(Customer customer);
 }

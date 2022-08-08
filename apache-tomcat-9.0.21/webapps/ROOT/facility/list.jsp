@@ -31,7 +31,7 @@
                 <div class="col-lg-8">
                     <form action="/facility" class="d-flex">
                         <input class="form-control me-2 w-50" type="text" placeholder="SearchNameOfFacility"
-                               name="name" value="${keyWork}" aria-label="Search">
+                               name="keyWork" value="${keyWork}" aria-label="Search">
                         <button class="btn btn-success" name="action" value="search" type="submit">Search</button>
                     </form>
                 </div>

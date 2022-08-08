@@ -38,8 +38,8 @@
             <label for="gender" class="form-label">Gender :</label>
            <div> <select id="gender" name="gender" class="form-control">
                 <option>Choose Gender</option>
-                <option>Male</option>
-                <option>Female</option>
+                <option value="1">Male</option>
+                <option value="0">Female</option>
             </select>
            </div>
         </div>
@@ -71,7 +71,7 @@
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Address :</label>
-            <input type="text" class="form-control" id="address" name="address">
+            <input type="text" class="form-control" id="address" name="address" value="${customer.address}">
         </div>
         <div>
             <button class="btn btn-success" type="submit">Accept</button>

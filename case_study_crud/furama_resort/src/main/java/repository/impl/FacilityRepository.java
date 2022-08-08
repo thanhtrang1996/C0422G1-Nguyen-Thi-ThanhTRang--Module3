@@ -59,7 +59,7 @@ public class FacilityRepository implements IFacilityRepository {
                 String standardRoom = resultSet.getString("tieu_chuan_phong");
                 String descriptionOtherConvenience = resultSet.getString("mo_ta_tien_nghi_khac");
                 Double poolArea = resultSet.getDouble("dien_tich_ho_boi");
-                Integer numberOfFloors = resultSet.getInt("so_tang");
+                String numberOfFloors = resultSet.getString("so_tang");
                 String facilityFree = resultSet.getString("dich_vu_mien_phi_di_kem");
                 Facility facility = new Facility(id, name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
                 facilityList.add(facility);
@@ -95,7 +95,7 @@ public class FacilityRepository implements IFacilityRepository {
                 String standardRoom = resultSet.getString("tieu_chuan_phong");
                 String descriptionOtherConvenience = resultSet.getString("mo_ta_tien_nghi_khac");
                 Double poolArea = resultSet.getDouble("dien_tich_ho_boi");
-                Integer numberOfFloors = resultSet.getInt("so_tang");
+                String numberOfFloors = resultSet.getString("so_tang");
                 String facilityFree = resultSet.getString("dich_vu_mien_phi_di_kem");
                 facility = new Facility(idFacility, name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
             }
@@ -132,12 +132,12 @@ public class FacilityRepository implements IFacilityRepository {
     }
 
     @Override
-    public List<Facility> searchFacilityByName(String name) {
+    public List<Facility> searchFacilityByName(String keyWork) {
         Connection connection = DBConnect.getConnectDB();
         List<Facility> facilityList = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_FACILITY);
-            preparedStatement.setString(1,"%" + name +"%");
+            preparedStatement.setString(1,"%" + keyWork +"%");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 Integer id= resultSet.getInt("ma_dich_vu");
@@ -150,7 +150,7 @@ public class FacilityRepository implements IFacilityRepository {
                 String standardRoom = resultSet.getString("tieu_chuan_phong");
                 String descriptionOtherConvenience = resultSet.getString("mo_ta_tien_nghi_khac");
                 Double poolArea = resultSet.getDouble("dien_tich_ho_boi");
-                Integer numberOfFloors = resultSet.getInt("so_tang");
+                String numberOfFloors = resultSet.getString("so_tang");
                 String facilityFree = resultSet.getString("dich_vu_mien_phi_di_kem");
                 Facility facility = new Facility(id,nameFacility,area,cost,maxPeople,rentTypeId,facilityTypeId,standardRoom,descriptionOtherConvenience
                 ,poolArea,numberOfFloors,facilityFree);
@@ -205,7 +205,7 @@ public class FacilityRepository implements IFacilityRepository {
             preparedStatement.setInt(4, facility.getMaxPeople());
             preparedStatement.setString(5, facility.getStandardRoom());
             preparedStatement.setString(6, facility.getDescriptionOtherConvenience());
-            preparedStatement.setInt(7, facility.getNumberOfFloors());
+            preparedStatement.setString(7, facility.getNumberOfFloors());
             preparedStatement.setInt(8, facility.getRentTypeId());
             preparedStatement.setInt(9, facility.getFacilityTypeId());
             preparedStatement.setInt(10, facility.getId());
@@ -234,7 +234,7 @@ public class FacilityRepository implements IFacilityRepository {
             preparedStatement.setString(5, facility.getStandardRoom());
             preparedStatement.setString(6, facility.getDescriptionOtherConvenience());
             preparedStatement.setDouble(7, facility.getPoolArea());
-            preparedStatement.setInt(8, facility.getNumberOfFloors());
+            preparedStatement.setString(8, facility.getNumberOfFloors());
             preparedStatement.setInt(9, facility.getRentTypeId());
             preparedStatement.setInt(10, facility.getFacilityTypeId());
             preparedStatement.setInt(11, facility.getId());
@@ -286,7 +286,7 @@ public class FacilityRepository implements IFacilityRepository {
             preparedStatement.setInt(4, facility.getMaxPeople());
             preparedStatement.setString(5, facility.getStandardRoom());
             preparedStatement.setString(6, facility.getDescriptionOtherConvenience());
-            preparedStatement.setInt(7, facility.getNumberOfFloors());
+            preparedStatement.setString(7, facility.getNumberOfFloors());
             preparedStatement.setInt(8, facility.getRentTypeId());
             preparedStatement.setInt(9, facility.getFacilityTypeId());
             preparedStatement.executeUpdate();
@@ -313,7 +313,7 @@ public class FacilityRepository implements IFacilityRepository {
             preparedStatement.setString(5, facility.getStandardRoom());
             preparedStatement.setString(6, facility.getDescriptionOtherConvenience());
             preparedStatement.setDouble(7, facility.getPoolArea());
-            preparedStatement.setInt(8, facility.getNumberOfFloors());
+            preparedStatement.setString(8, facility.getNumberOfFloors());
             preparedStatement.setInt(9, facility.getRentTypeId());
             preparedStatement.setInt(10, facility.getFacilityTypeId());
             preparedStatement.executeUpdate();

@@ -35,17 +35,16 @@ public class CustomerServlet extends HttpServlet {
             case "delete":
                 deleteCustomer(request, response);
                 break;
+            case "search":
+                searchCustomer(request,response);
+                break;
             default:
                 listCustomer(request, response);
                 break;
         }
     }
 
-    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String id = request.getParameter("id");
-        customerService.deleteCustomer(Integer.parseInt(id));
-        response.sendRedirect("/customer");
-    }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,7 +61,6 @@ public class CustomerServlet extends HttpServlet {
                 updateCustomer(request, response);
                 break;
         }
-
     }
 
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -94,7 +92,7 @@ public class CustomerServlet extends HttpServlet {
         int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
         String name = request.getParameter("name");
         String dateOfBirth = request.getParameter("dateOfBirth");
-        Boolean gender = Boolean.valueOf(request.getParameter("gender"));
+        Integer gender = Integer.valueOf(request.getParameter("gender"));
         String idCard = request.getParameter("idCard");
         String phoneNumber = request.getParameter("phoneNumber");
         String email = request.getParameter("email");
@@ -122,7 +120,7 @@ public class CustomerServlet extends HttpServlet {
         String customerTypeId = request.getParameter("customerTypeId");
         String name = request.getParameter("name");
         String dateOfBirth = request.getParameter("dateOfBirth");
-        Boolean gender = Boolean.valueOf(request.getParameter("gender"));
+        Integer gender = Integer.valueOf(request.getParameter("gender"));
         String idCard = request.getParameter("idCard");
         String phoneNumber = request.getParameter("phoneNumber");
         String email = request.getParameter("email");
@@ -141,8 +139,27 @@ public class CustomerServlet extends HttpServlet {
             request.setAttribute("dateOfBirth", dateOfBirth);
             request.setAttribute("email", email);
             request.setAttribute("customer", customer);
+            List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
+            request.setAttribute("customerTypeList", customerTypeList);
             request.getRequestDispatcher("customer/createCustomer.jsp").forward(request, response);
         }
 
+    }
+    private void searchCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String keyName = request.getParameter("keyName");
+        String keyAddress = request.getParameter("keyAddress");
+        List<Customer> customerList = customerService.searchByName(keyName,keyAddress);
+        List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
+        request.setAttribute("keyName",keyName);
+        request.setAttribute("keyAddress",keyAddress);
+        request.setAttribute("customerList" ,customerList);
+        request.setAttribute("customerTypeList",customerTypeList);
+       request.getRequestDispatcher("customer/listCustomer.jsp").forward(request,response);
+    }
+
+    private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String id = request.getParameter("id");
+        customerService.deleteCustomer(Integer.parseInt(id));
+        response.sendRedirect("/customer");
     }
 }

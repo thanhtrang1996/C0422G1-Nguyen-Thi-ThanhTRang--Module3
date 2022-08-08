@@ -6,12 +6,19 @@ import repository.ICustomerRepository;
 import repository.impl.CustomerRepository;
 import service.ICustomerService;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class CustomerService implements ICustomerService {
     private ICustomerRepository customerRepository = new CustomerRepository();
+
     @Override
     public List<Customer> selectAllCustomer() {
         return customerRepository.selectAllCustomer();
@@ -24,43 +31,64 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Map<String, String> check(Customer customer) {
-        Map<String,String> mapErrors = new HashMap<>();
+        Map<String, String> mapErrors = new HashMap<>();
         if (!customer.getName().isEmpty()) {
-            if (!customer.getName().matches("^([A-Z][a-z]*)+(\\s[A-Z][a-z])*")){
+            if (!customer.getName().matches("^([A-Z][a-z]*)+(\\s[A-Z][a-z]*)*")) {
                 mapErrors.put("nameErrors", "Please input right format!");
             }
         } else {
             mapErrors.put("nameErrors", "Please input name!");
         }
-        if(!customer.getIdCard().isEmpty()){
-            if (!customer.getIdCard().matches("^([0-9]{11}|[0-9]{9})")){
-                mapErrors.put("idCardErrors","Please input right format!");
+        if (!customer.getIdCard().isEmpty()) {
+            if (!customer.getIdCard().matches("^([0-9]{11}|[0-9]{9})")) {
+                mapErrors.put("idCardErrors", "Please input right format!");
             }
-        }else {mapErrors.put("idCardErrors", "Please input IdCard!");}
+        } else {
+            mapErrors.put("idCardErrors", "Please input IdCard!");
+        }
 
-        if(!customer.getPhoneNumber().isEmpty()){
-            if (!customer.getPhoneNumber().matches("^(090[0-9]{7})|(091[0-9]{7})|((84)\\+90[0-9]{7})|((84)\\+91[0-9]{7})$")){
+        if (!customer.getPhoneNumber().isEmpty()) {
+            if (!customer.getPhoneNumber().matches("^(090[0-9]{7})|(091[0-9]{7})|([(84)\\+]90[0-9]{7})|([(84)\\+]91[0-9]{7})$")) {
+                mapErrors.put("phoneErrors", "Please input right format!  ex:090XXXXXXX OR 091XXXXXXX OR (84)+91XXXXXXX OR (84)+90XXXXXXXX");
+            }
+        } else {
+            mapErrors.put("phoneErrors", "Please input PhoneNumber!");
+        }
+        if (!customer.getEmail().isEmpty()) {
+            if (!customer.getEmail().matches("^([a-z]+@gmail.[a-z]{1,3})")) {
+                mapErrors.put("emailErrors", "Please input right format! ex:trang@gmail.com");
+            }
+        } else {
+            mapErrors.put("emailErrors", "Please input Email !");
+        }
+        if (!customer.getDateOfBirth().isEmpty()) {
 
-                mapErrors.put("phoneErrors","Please input right format!  ex:090XXXXXXX OR 091XXXXXXX OR 84+91XXXXXXX OR 84+90XXXXXXXX");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date date = simpleDateFormat.parse(customer.getDateOfBirth());
+            } catch (ParseException e) {
+                mapErrors.put("dateErrors", "Day of birth invalid");
+            }
 
-        }else {mapErrors.put("phoneErrors", "Please input PhoneNumber!");}
-          if (!customer.getEmail().isEmpty()) {
-              if (!customer.getEmail().matches("^([a-z]+@gmail.[a-z]{1,3})")){
-                 mapErrors.put("emailErrors","Please input right format! ex:trang@gmail.com");
-              }
-          }else {
-              mapErrors.put("emailErrors","Please input Email !");
-          }
-          if (!customer.getDateOfBirth().isEmpty()){
-              if (!customer.getDateOfBirth().matches("(^[0-2]?[0-9]|[3]0|[3]1\\/0[0-9]|1[12]\\/[12][90][0-9][0-9]$)"));
-              mapErrors.put("dateErrors","Please input right format!");
-          } else {
-              mapErrors.put("dateErrors","Please input Date Of Birthday");
-          }
+            String pattern = "yyyy-MM-dd";
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+            LocalDate birthday = LocalDate.parse(customer.getDateOfBirth(), formatter);
+            LocalDate now = LocalDate.now();
+            int age = Period.between(birthday, now).getYears();
+            if (age < 18) {
+                mapErrors.put("dateErrors", "18+");
+            }
 
-    }
+        } else {
+            mapErrors.put("dateErrors", "Please input Date Of Birthday");
+        }
 
         return mapErrors;
+    }
+
+    @Override
+    public List<Customer> searchByName(String keyName, String keyAddress) {
+        return customerRepository.searchByName(keyName, keyAddress);
     }
 
     @Override

@@ -31,14 +31,15 @@
         </div>
         <div class="mb-3">
             <label for="birthday" class="form-label">Birthday :</label>
-            <input type="date" class="form-control" id="birthday" name ="dateOfBirth">
+            <input type="date" class="form-control" id="birthday" name ="dateOfBirth" value="${customer.dateOfBirth}">
+            <p style="color: red">${errors.get('dateErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="gender" class="form-label">Gender :</label>
            <div> <select id="gender" name="gender" class="form-control">
                 <option>Choose Gender</option>
-                <option>Male</option>
-                <option>Female</option>
+                <option value="1">Male</option>
+                <option value="0">Female</option>
             </select>
            </div>
         </div>
@@ -49,11 +50,13 @@
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Phone :</label>
-            <input type="text" class="form-control" id="phone" name = "phoneNumber">
+            <input type="text" class="form-control" id="phone" name = "phoneNumber" value="${customer.phoneNumber}">
+            <p style="color: red">${errors.get('phoneErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">email :</label>
-            <input type="text" class="form-control" id="email" name="email">
+            <input type="text" class="form-control" id="email" name="email" value="${customer.email}">
+            <p style="color: red">${errors.get('emailErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="customer_type" class="form-label">Customer_type :</label>
@@ -68,7 +71,7 @@
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Address :</label>
-            <input type="text" class="form-control" id="address" name="address">
+            <input type="text" class="form-control" id="address" name="address" value="${customer.address}">
         </div>
         <div>
             <button class="btn btn-success" type="submit">Accept</button>

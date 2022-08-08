@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class CustomerRepository implements ICustomerRepository {
     private static final String SELECT_ALL_CUSTOMER = " select *from khach_hang ";
@@ -18,6 +17,7 @@ public class CustomerRepository implements ICustomerRepository {
     private static final String INSERT_INTO_CUSTOMER = " insert into khach_hang(ho_ten,ngay_sinh,gioi_tinh,so_cmnd,so_dien_thoai,email,dia_chi,ma_loai_khach) values (?,?,?,?,?,?,?,?) ";
     private static final String UPDATE_CUSTOMER = " update khach_hang set ho_ten=?,ngay_sinh=?,gioi_tinh=?,so_cmnd=?,so_dien_thoai=?,email=?,dia_chi =?,ma_loai_khach=? where ma_khach_hang=? ";
     private static final String SELECT_CUSTOMER = " select * from khach_hang where ma_khach_hang = ? ";
+    private static final String SEARCH_CUSTOMER = " select * from `khach_hang` where `ho_ten` like ?  and `dia_chi` like ?";
 
 
     @Override
@@ -32,7 +32,7 @@ public class CustomerRepository implements ICustomerRepository {
                 int customer_type_id = resultSet.getInt("ma_loai_khach");
                 String name = resultSet.getString("ho_ten");
                 String date_of_birth = resultSet.getString("ngay_sinh");
-                boolean gender = resultSet.getBoolean("gioi_tinh");
+                Integer gender = resultSet.getInt("gioi_tinh");
                 String id_card = resultSet.getString("so_cmnd");
                 String phone_number = resultSet.getString("so_dien_thoai");
                 String email = resultSet.getString("email");
@@ -66,7 +66,7 @@ public class CustomerRepository implements ICustomerRepository {
                 int customerTypeId = resultSet.getInt("ma_loai_khach");
                 String name = resultSet.getString("ho_ten");
                 String birthday = resultSet.getString("ngay_sinh");
-                boolean gender = resultSet.getBoolean("gioi_tinh");
+                Integer gender = resultSet.getInt("gioi_tinh");
                 String idCard = resultSet.getString("so_cmnd");
                 String phoneNumber = resultSet.getString("so_dien_thoai");
                 String email = resultSet.getString("email");
@@ -86,7 +86,7 @@ public class CustomerRepository implements ICustomerRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO_CUSTOMER);
             preparedStatement.setString(1, customer.getName());
             preparedStatement.setString(2, customer.getDateOfBirth());
-            preparedStatement.setBoolean(3, customer.isGender());
+            preparedStatement.setInt(3, customer.getGender());
             preparedStatement.setString(4, customer.getIdCard());
             preparedStatement.setString(5, customer.getPhoneNumber());
             preparedStatement.setString(6, customer.getEmail());
@@ -126,7 +126,7 @@ public class CustomerRepository implements ICustomerRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_CUSTOMER);
             preparedStatement.setString(1, customer.getName());
             preparedStatement.setString(2, customer.getDateOfBirth());
-            preparedStatement.setBoolean(3, customer.isGender());
+            preparedStatement.setInt(3, customer.getGender());
             preparedStatement.setString(4, customer.getIdCard());
             preparedStatement.setString(5, customer.getPhoneNumber());
             preparedStatement.setString(6, customer.getEmail());
@@ -145,6 +145,42 @@ public class CustomerRepository implements ICustomerRepository {
         }
 
         return true;
+    }
+
+    @Override
+    public List<Customer> searchByName(String keyName, String keyAddress) {
+        Connection connection = DBConnect.getConnectDB();
+        Customer customer = null;
+        List<Customer> customerList = new ArrayList<>();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_CUSTOMER);
+            preparedStatement.setString(1, "%" + keyName + "%");
+            preparedStatement.setString(2, "%" + keyAddress + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idCustomer = resultSet.getInt("ma_khach_hang");
+                int customerTypeId = resultSet.getInt("ma_loai_khach");
+                String nameCustomer = resultSet.getString("ho_ten");
+                String birthday = resultSet.getString("ngay_sinh");
+                Integer gender = resultSet.getInt("gioi_tinh");
+                String idCard = resultSet.getString("so_cmnd");
+                String phoneNumber = resultSet.getString("so_dien_thoai");
+                String email = resultSet.getString("email");
+                String addressCustomer = resultSet.getString("dia_chi");
+                customer = new Customer(idCustomer, customerTypeId, nameCustomer, birthday, gender, idCard, phoneNumber, email, addressCustomer);
+                customerList.add(customer);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return customerList;
     }
 
 }

@@ -3,8 +3,6 @@ package controller;
 import model.Facility;
 import model.FacilityType;
 import model.RentType;
-import repository.IRentTypeRepository;
-import repository.impl.RentTypeRepository;
 import service.IFacilityService;
 import service.IFacilityTypeService;
 import service.IRentTypeService;
@@ -102,7 +100,7 @@ public class FacilityServlet extends HttpServlet {
         Integer facilityTypeId = Integer.parseInt(request.getParameter("facilityTypeId"));
         String standardRoom;
         String descriptionOtherConvenience;
-        Integer numberOfFloors;
+        String numberOfFloors;
         Facility facility = null;
         switch (chooseFacility) {
             case "room":
@@ -113,14 +111,14 @@ public class FacilityServlet extends HttpServlet {
             case "house":
                 standardRoom = request.getParameter("standardRoom");
                 descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
-                numberOfFloors = Integer.valueOf(request.getParameter("numberOfFloors"));
+                numberOfFloors = request.getParameter("numberOfFloors");
                 facility = new Facility(id, name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, numberOfFloors);
                 facilityService.updateHouse(facility);
                 break;
             case "villa":
                 standardRoom = request.getParameter("standardRoom");
                 descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
-                numberOfFloors = Integer.valueOf(request.getParameter("numberOfFloors"));
+                numberOfFloors = request.getParameter("numberOfFloors");
                 Double poolArea = Double.valueOf(request.getParameter("poolArea"));
                 facility = new Facility(id, name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, numberOfFloors, poolArea);
                 facilityService.updateVilla(facility);
@@ -142,7 +140,7 @@ public class FacilityServlet extends HttpServlet {
         String standardRoom;
         String descriptionOtherConvenience;
         Map<String, String> errors;
-        Integer numberOfFloors;
+        String numberOfFloors;
         switch (choiceFacility) {
             case "room":
                 String facilityFree = request.getParameter("facilityFree");
@@ -160,7 +158,7 @@ public class FacilityServlet extends HttpServlet {
             case "house":
                 standardRoom = request.getParameter("standardRoom");
                 descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
-                numberOfFloors = Integer.valueOf(request.getParameter("numberOfFloors"));
+                numberOfFloors = request.getParameter("numberOfFloors");
                 facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId,
                         standardRoom, descriptionOtherConvenience, numberOfFloors);
                 errors = facilityService.check(facility);
@@ -176,7 +174,7 @@ public class FacilityServlet extends HttpServlet {
             case "villa":
                 standardRoom = request.getParameter("standardRoom");
                 descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
-                numberOfFloors = Integer.valueOf(request.getParameter("numberOfFloors"));
+                numberOfFloors = request.getParameter("numberOfFloors");
                 Double poolArea = Double.valueOf(request.getParameter("poolArea"));
                 facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId,
                         standardRoom, descriptionOtherConvenience, numberOfFloors, poolArea);

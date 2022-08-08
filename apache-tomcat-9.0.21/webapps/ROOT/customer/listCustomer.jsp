@@ -23,7 +23,22 @@
 <%@ include file="../include/header.jsp" %>
 <div class="container">
     <h1>List Customer</h1>
-    <a href="/customer?action=create" class=" btn btn-success">Create Customer</a>
+    <div class="row">
+        <div class="col-lg-4"><a href="/customer?action=create" class="btn btn-success">Create Customer</a></div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-8">
+                    <form action="/customer" class="d-flex">
+                        <input class="form-control me-2 w-50" type="text" placeholder="SearchName"
+                               name="keyName" value="${keyName}" aria-label="Search">
+                        <input class="form-control me-2 w-50" type="text" placeholder="SearchAddress"
+                               name="keyAddress" value="${keyAddress}" aria-label="Search">
+                        <button class="btn btn-success" name="action" value="search" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <table class="table table-hover" id="myTable">
         <thead>
         <tr>
@@ -46,10 +61,10 @@
                 <td>${customer.id}</td>
                 <td>${customer.name}</td>
                 <td>${customer.dateOfBirth}</td>
-                <c:if test="${customer.gender}">
+                <c:if test="${customer.gender == 1}">
                     <td>Male</td>
                 </c:if>
-                <c:if test="${!customer.gender}">
+                <c:if test="${customer.gender == 0}">
                     <td>FeMale</td>
                 </c:if>
                 <td>${customer.idCard}</td>

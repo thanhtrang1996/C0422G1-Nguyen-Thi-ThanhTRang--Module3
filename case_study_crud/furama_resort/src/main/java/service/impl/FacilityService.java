@@ -68,6 +68,14 @@ public class FacilityService implements IFacilityService {
         } else {
             mapErrors.put("nameErrors", "Please input name!");
         }
+        if (!facility.getNumberOfFloors().isEmpty()){
+            if (!facility.getNumberOfFloors().matches("^[1-9]+$")){
+                mapErrors.put("numberOfFloorsErrors","Please input right format!");
+            }
+            else {
+                mapErrors.put("umberOfFloorsErrors","Please input Number Of Floors");
+            }
+        }
             return mapErrors;
     }
     @Override
