@@ -21,8 +21,8 @@ public class RentTypeRepository implements IRentTypeRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_RENT_TYPE);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
+                int id = resultSet.getInt("ma_kieu_thue");
+                String name = resultSet.getString("ten_kieu_thue");
                 RentType rentType = new RentType(id,name);
                 rentTypeList.add(rentType);
             }

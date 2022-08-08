@@ -82,8 +82,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">
-                            <input type="text" readonly name="id" id="deleteId">
+                        <div class="modal-body ">
+                            <input type="text" readonly name="id" id="deleteId"><br>
                             <input type="text" readonly name="name" id="deleteName">
 
                         </div>
@@ -101,7 +101,6 @@
 <%@include file="../include/footer.jsp"%>
 <script>
    function infoToModal(id,name) {
-       console.log(id,name)
        document.getElementById("deleteId").value = id;
        document.getElementById("deleteName").value = name;
    }
@@ -111,7 +110,7 @@
         $('#myTable').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
-            "pageLength": 5
+            "pageLength": 4
         });
     });
 </script>

@@ -73,9 +73,9 @@ public class FacilityServlet extends HttpServlet {
         List<Facility> facilityList = facilityService.selectAllFacility();
         List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
         List<RentType> rentTypeList = rentTypeService.selectAllRentType();
-        request.setAttribute("facilityType",facilityTypeList);
-        request.setAttribute("rentType",rentTypeList);
-        request.setAttribute("facility", facilityList);
+        request.setAttribute("facilityTypeList",facilityTypeList);
+        request.setAttribute("rentTypeList",rentTypeList);
+        request.setAttribute("facilityList", facilityList);
         request.getRequestDispatcher("facility/list.jsp").forward(request, response);
     }
 
@@ -169,7 +169,7 @@ public class FacilityServlet extends HttpServlet {
     private void searchFacility(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name= request.getParameter("name");
         List<Facility> facilityList = facilityService.searchFacility(name);
-        request.setAttribute("facility", facilityList);
+        request.setAttribute("facilityList", facilityList);
         request.setAttribute("name", name);
         request.getRequestDispatcher("facility/list.jsp").forward(request, response);
     }

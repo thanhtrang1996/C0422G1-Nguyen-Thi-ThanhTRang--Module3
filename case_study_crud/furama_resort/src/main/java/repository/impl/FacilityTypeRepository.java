@@ -22,8 +22,8 @@ public class FacilityTypeRepository implements IFacilityTypeRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FACILITY_TYPE);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
+                int id = resultSet.getInt("ma_loai_dich_vu");
+                String name = resultSet.getString("ten_loai_dich_vu");
                 FacilityType facilityType = new FacilityType(id,name);
                 facilityTypeList.add(facilityType);
             }

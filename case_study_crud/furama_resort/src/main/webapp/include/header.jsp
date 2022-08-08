@@ -77,12 +77,11 @@
                 </li>
             </ul>
             <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-success" name="action" type="submit">Search</button>
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success"type="button" >Search</button>
             </form>
         </div>
     </div>
 </nav>
-
 </body>
 </html>
