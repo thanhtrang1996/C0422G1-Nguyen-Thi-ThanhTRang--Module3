@@ -12,6 +12,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "CustomerServlet", value = "/customer")
 public class CustomerServlet extends HttpServlet {
@@ -67,7 +68,7 @@ public class CustomerServlet extends HttpServlet {
     private void listCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Customer> customerList = customerService.selectAllCustomer();
         List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
-        request.setAttribute("customer", customerList);
+        request.setAttribute("customerList", customerList);
         request.setAttribute("customerTypeList", customerTypeList);
         request.getRequestDispatcher("customer/listCustomer.jsp").forward(request, response);
     }
@@ -88,7 +89,7 @@ public class CustomerServlet extends HttpServlet {
     }
 
 
-    private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void updateCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
         String name = request.getParameter("name");
@@ -98,13 +99,26 @@ public class CustomerServlet extends HttpServlet {
         String phoneNumber = request.getParameter("phoneNumber");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-        Customer customer = new Customer(id, customerTypeId, name, dateOfBirth, gender, idCard, phoneNumber, email, address);
-        customerService.updateCustomer(customer);
-        response.sendRedirect("/customer");
+        Customer customer = new Customer(id, customerTypeId, name, dateOfBirth, gender, idCard,
+                phoneNumber, email, address);
+        Map<String, String> errors = customerService.check(customer);
+        if (errors.isEmpty()) {
+            customerService.updateCustomer(customer);
+            response.sendRedirect("/customer");
+        } else {
+            request.setAttribute("errors", errors);
+            request.setAttribute("name", name);
+            request.setAttribute("idCard", idCard);
+            request.setAttribute("phoneNumber", phoneNumber);
+            request.setAttribute("dateOfBirth", dateOfBirth);
+            request.setAttribute("email", email);
+            request.setAttribute("customer", customer);
+            request.getRequestDispatcher("customer/updateCustomer.jsp").forward(request, response);
+        }
 
     }
 
-    private void createCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void createCustomer(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String customerTypeId = request.getParameter("customerTypeId");
         String name = request.getParameter("name");
         String dateOfBirth = request.getParameter("dateOfBirth");
@@ -113,9 +127,22 @@ public class CustomerServlet extends HttpServlet {
         String phoneNumber = request.getParameter("phoneNumber");
         String email = request.getParameter("email");
         String address = request.getParameter("address");
-        Customer customer = new Customer(Integer.parseInt(customerTypeId), name, dateOfBirth, gender, idCard, phoneNumber, email, address);
-        List<Customer> customerList = customerService.insertCustomer(customer);
-        response.sendRedirect("/customer");
+        Customer customer = new Customer(Integer.parseInt(customerTypeId), name, dateOfBirth, gender,
+                idCard, phoneNumber, email, address);
+        Map<String, String> errors = customerService.check(customer);
+        if (errors.isEmpty()) {
+            customerService.insertCustomer(customer);
+            response.sendRedirect("/customer");
+        } else {
+            request.setAttribute("errors", errors);
+            request.setAttribute("name", name);
+            request.setAttribute("idCard", idCard);
+            request.setAttribute("phoneNumber", phoneNumber);
+            request.setAttribute("dateOfBirth", dateOfBirth);
+            request.setAttribute("email", email);
+            request.setAttribute("customer", customer);
+            request.getRequestDispatcher("customer/createCustomer.jsp").forward(request, response);
+        }
 
     }
 }

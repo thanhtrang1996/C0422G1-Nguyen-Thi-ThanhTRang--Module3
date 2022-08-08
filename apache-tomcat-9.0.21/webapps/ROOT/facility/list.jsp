@@ -31,7 +31,7 @@
                 <div class="col-lg-8">
                     <form action="/facility" class="d-flex">
                         <input class="form-control me-2 w-50" type="text" placeholder="SearchNameOfFacility"
-                               name="name" aria-label="Search">
+                               name="name" value="${keyWork}" aria-label="Search">
                         <button class="btn btn-success" name="action" value="search" type="submit">Search</button>
                     </form>
                 </div>
@@ -66,16 +66,18 @@
                     <td>${facility.area}</td>
                     <td>${facility.cost}</td>
                     <td>${facility.maxPeople}</td>
-                    <c:forEach items="${rentTypeList}" var="rentType">
+                    <td> <c:forEach items="${rentTypeList}" var="rentType">
                         <c:if test="${rentType.id == facility.rentTypeId}">
-                            <td>${rentType.name}</td>
+                            ${rentType.name}
                         </c:if>
                     </c:forEach>
-                    <c:forEach items="${facilityTypeList}" var="facilityType">
+                    </td>
+                    <td>  <c:forEach items="${facilityTypeList}" var="facilityType">
                         <c:if test="${facilityType.id == facility.facilityTypeId}">
-                            <td>${facilityType.name}</td>
+                            <span>${facilityType.name}</span>
                         </c:if>
                     </c:forEach>
+                    </td>
                     <td>${facility. standardRoom}</td>
                     <td>${facility.descriptionOtherConvenience}</td>
                     <td>${facility.poolArea}</td>

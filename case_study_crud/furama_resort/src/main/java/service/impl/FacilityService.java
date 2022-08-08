@@ -5,7 +5,9 @@ import repository.IFacilityRepository;
 import repository.impl.FacilityRepository;
 import service.IFacilityService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FacilityService implements IFacilityService {
     private IFacilityRepository facilityRepository = new FacilityRepository();
@@ -32,6 +34,7 @@ public class FacilityService implements IFacilityService {
 
     @Override
     public void insertRoom(Facility facility) {
+
         this.facilityRepository.insertRoom(facility);
     }
 
@@ -55,6 +58,18 @@ public class FacilityService implements IFacilityService {
         return facilityRepository.updateVilla(facility);
     }
 
+    @Override
+    public Map<String, String> check(Facility facility) {
+        Map<String, String> mapErrors = new HashMap<>();
+        if (!facility.getName().isEmpty()) {
+            if (!facility.getName().matches("^([A-Z][a-z]*)+(\\s[A-Z][a-z])*")) {
+                mapErrors.put("nameErrors", "Please input right format!");
+            }
+        } else {
+            mapErrors.put("nameErrors", "Please input name!");
+        }
+            return mapErrors;
+    }
     @Override
     public void insertVilla(Facility facility) {
         this.facilityRepository.insertVilla(facility);

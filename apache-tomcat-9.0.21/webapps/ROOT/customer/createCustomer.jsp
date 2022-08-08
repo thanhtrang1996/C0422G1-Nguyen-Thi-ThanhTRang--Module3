@@ -26,7 +26,8 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Name Customer:</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="name" value="${customer.name}">
+            <p style="color: red">${errors.get('nameErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="birthday" class="form-label">Birthday :</label>
@@ -43,7 +44,8 @@
         </div>
         <div class="mb-3">
             <label for="id_card" class="form-label"> Id_card :</label>
-            <input type="text" class="form-control" id="id_card" name="idCard">
+            <input type="text" class="form-control" id="id_card" name="idCard" value="${customer.idCard}">
+            <p style="color: red">${errors.get('idCardErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Phone :</label>

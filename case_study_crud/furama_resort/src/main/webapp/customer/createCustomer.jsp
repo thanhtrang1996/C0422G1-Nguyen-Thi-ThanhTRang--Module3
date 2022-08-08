@@ -26,11 +26,13 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Name Customer:</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="name" value="${customer.name}">
+            <p style="color: red">${errors.get('nameErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="birthday" class="form-label">Birthday :</label>
-            <input type="date" class="form-control" id="birthday" name ="dateOfBirth">
+            <input type="date" class="form-control" id="birthday" name ="dateOfBirth" value="${customer.dateOfBirth}">
+            <p style="color: red">${errors.get('dateErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="gender" class="form-label">Gender :</label>
@@ -43,15 +45,18 @@
         </div>
         <div class="mb-3">
             <label for="id_card" class="form-label"> Id_card :</label>
-            <input type="text" class="form-control" id="id_card" name="idCard">
+            <input type="text" class="form-control" id="id_card" name="idCard" value="${customer.idCard}">
+            <p style="color: red">${errors.get('idCardErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Phone :</label>
-            <input type="text" class="form-control" id="phone" name = "phoneNumber">
+            <input type="text" class="form-control" id="phone" name = "phoneNumber" value="${customer.phoneNumber}">
+            <p style="color: red">${errors.get('phoneErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">email :</label>
-            <input type="text" class="form-control" id="email" name="email">
+            <input type="text" class="form-control" id="email" name="email" value="${customer.email}">
+            <p style="color: red">${errors.get('emailErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="customer_type" class="form-label">Customer_type :</label>

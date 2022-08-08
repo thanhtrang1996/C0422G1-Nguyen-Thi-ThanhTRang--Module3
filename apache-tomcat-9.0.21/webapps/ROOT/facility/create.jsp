@@ -35,7 +35,8 @@
 
         <div class="mb-3">
             <label for="name" class="form-label">Name :</label>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="name" value="${facility.name}">
+            <p style="color: red">${errors.get('nameErrors')}</p>
         </div>
         <div class="mb-3">
             <label for="area" class="form-label">Area :</label>
@@ -56,6 +57,7 @@
         <div class="mb-3">
             <label for="facility_type_id" class="form-label">Facility type id</label>
             <input type="number" class="form-control" id="facility_type_id" name="facilityTypeId">
+
         </div>
         <div class="mb-3" id="add" style="display: none">
             <label for="standard_room" class="form-label">Standard_room :</label>

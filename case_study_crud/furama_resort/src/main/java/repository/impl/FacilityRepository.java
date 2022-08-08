@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FacilityRepository implements IFacilityRepository {
     private static final String SELECT_ALL_FACILITY = " select * from dich_vu ";
@@ -121,6 +123,12 @@ public class FacilityRepository implements IFacilityRepository {
         }
 
         return true;
+    }
+
+    @Override
+    public Map<String, String> check(Facility facility) {
+
+        return null;
     }
 
     @Override

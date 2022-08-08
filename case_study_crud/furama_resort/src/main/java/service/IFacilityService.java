@@ -3,6 +3,7 @@ package service;
 import model.Facility;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IFacilityService {
     List<Facility> selectAllFacility();
@@ -19,4 +20,5 @@ public interface IFacilityService {
     void insertVilla(Facility facility);
 
     Facility selectFacility(int id);
+    Map<String,String> check(Facility facility);
 }
