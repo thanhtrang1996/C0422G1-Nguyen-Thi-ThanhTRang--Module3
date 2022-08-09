@@ -111,6 +111,8 @@ public class CustomerServlet extends HttpServlet {
             request.setAttribute("dateOfBirth", dateOfBirth);
             request.setAttribute("email", email);
             request.setAttribute("customer", customer);
+            List<CustomerType> customerTypeList = customerTypeService.selectAllCustomerType();
+            request.setAttribute("customerTypeList", customerTypeList);
             request.getRequestDispatcher("customer/updateCustomer.jsp").forward(request, response);
         }
 

@@ -59,10 +59,10 @@ public class FacilityService implements IFacilityService {
     }
 
     @Override
-    public Map<String, String> check(Facility facility) {
+    public Map<String, String> checkFacility(Facility facility) {
         Map<String, String> mapErrors = new HashMap<>();
         if (!facility.getName().isEmpty()) {
-            if (!facility.getName().matches("^([A-Z][a-z]*)+(\\s[A-Z][a-z])*")) {
+            if (!facility.getName().matches("^([A-Z][a-z]*)+(\\s[A-Z][a-z]+)*")) {
                 mapErrors.put("nameErrors", "Please input right format!");
             }
         } else {
@@ -72,9 +72,9 @@ public class FacilityService implements IFacilityService {
             if (!facility.getNumberOfFloors().matches("^[1-9]+$")){
                 mapErrors.put("numberOfFloorsErrors","Please input right format!");
             }
-            else {
-                mapErrors.put("umberOfFloorsErrors","Please input Number Of Floors");
-            }
+
+        }else {
+            mapErrors.put("numberOfFloorsErrors","Please input Number Of Floors");
         }
             return mapErrors;
     }

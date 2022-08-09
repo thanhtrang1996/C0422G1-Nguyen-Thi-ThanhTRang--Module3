@@ -33,12 +33,13 @@ public class CustomerService implements ICustomerService {
     public Map<String, String> check(Customer customer) {
         Map<String, String> mapErrors = new HashMap<>();
         if (!customer.getName().isEmpty()) {
-            if (!customer.getName().matches("^([A-Z][a-z]*)+(\\s[A-Z][a-z]*)*")) {
+            if (!customer.getName().matches("^[A-ZĐ][a-zỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâ]+( [A-ZĐ][a-zỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâ]*)*$")) {
                 mapErrors.put("nameErrors", "Please input right format!");
             }
         } else {
             mapErrors.put("nameErrors", "Please input name!");
         }
+
         if (!customer.getIdCard().isEmpty()) {
             if (!customer.getIdCard().matches("^([0-9]{11}|[0-9]{9})")) {
                 mapErrors.put("idCardErrors", "Please input right format!");
@@ -54,21 +55,22 @@ public class CustomerService implements ICustomerService {
         } else {
             mapErrors.put("phoneErrors", "Please input PhoneNumber!");
         }
+
         if (!customer.getEmail().isEmpty()) {
-            if (!customer.getEmail().matches("^([a-z]+@gmail.[a-z]{1,3})")) {
+            if (!customer.getEmail().matches("^([a-z]+[0-1]*@gmail.[a-z]{1,3})")) {
                 mapErrors.put("emailErrors", "Please input right format! ex:trang@gmail.com");
             }
         } else {
             mapErrors.put("emailErrors", "Please input Email !");
         }
         if (!customer.getDateOfBirth().isEmpty()) {
-
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            try {
-                Date date = simpleDateFormat.parse(customer.getDateOfBirth());
-            } catch (ParseException e) {
-                mapErrors.put("dateErrors", "Day of birth invalid");
-            }
+//
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//            try {
+//                Date date = simpleDateFormat.parse(customer.getDateOfBirth());
+//            } catch (ParseException e) {
+//                mapErrors.put("dateErrors", "Day of birth invalid");
+//            }
 
             String pattern = "yyyy-MM-dd";
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
@@ -76,12 +78,21 @@ public class CustomerService implements ICustomerService {
             LocalDate now = LocalDate.now();
             int age = Period.between(birthday, now).getYears();
             if (age < 18) {
-                mapErrors.put("dateErrors", "18+");
-            }
+                mapErrors.put("dateErrors", " Age must be over 18");
+           }
 
         } else {
             mapErrors.put("dateErrors", "Please input Date Of Birthday");
         }
+        LocalDate dayOfBirth = null;
+        if (!customer.getDateOfBirth().isEmpty()) {
+            try {
+                dayOfBirth = LocalDate.parse(customer.getDateOfBirth(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            } catch (Exception e) {
+                mapErrors.put("dateErrors", "Please input right format!");
+            }
+        } else {
+            mapErrors.put("dateErrors", "Please input day of birth!");}
 
         return mapErrors;
     }

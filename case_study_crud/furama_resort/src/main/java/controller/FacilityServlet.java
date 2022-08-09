@@ -80,16 +80,24 @@ public class FacilityServlet extends HttpServlet {
     private void showUpdateFacility(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         Facility facility = facilityService.selectFacility(id);
+        List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
+        List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+        request.setAttribute("facilityTypeList", facilityTypeList);
+        request.setAttribute("rentTypeList", rentTypeList);
         request.setAttribute("facility", facility);
         request.getRequestDispatcher("facility/update.jsp").forward(request, response);
     }
 
     private void showCreateFacility(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
+        List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+        request.setAttribute("facilityTypeList", facilityTypeList);
+        request.setAttribute("rentTypeList", rentTypeList);
         request.getRequestDispatcher("facility/create.jsp").forward(request, response);
     }
 
 
-    private void updateFacility(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void updateFacility(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String chooseFacility = request.getParameter("chooseFacility");
         Integer id = Integer.valueOf(request.getParameter("id"));
         String name = request.getParameter("name");
@@ -102,18 +110,44 @@ public class FacilityServlet extends HttpServlet {
         String descriptionOtherConvenience;
         String numberOfFloors;
         Facility facility = null;
+        Map<String, String> errors;
         switch (chooseFacility) {
             case "room":
                 String facilityFree = request.getParameter("facilityFree");
                 facility = new Facility(id, name, area, cost, maxPeople, rentTypeId, facilityTypeId, facilityFree);
-                facilityService.updateRoom(facility);
+                errors = facilityService.checkFacility(facility);
+                if (errors.isEmpty()) {
+                    facilityService.updateRoom(facility);
+                    response.sendRedirect("/facility");
+                } else {
+                    request.setAttribute("errors", errors);
+                    request.setAttribute("facility", facility);
+                    List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
+                    List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+                    request.setAttribute("facilityTypeList", facilityTypeList);
+                    request.setAttribute("rentTypeList", rentTypeList);
+                    request.getRequestDispatcher("/facility/update.jsp").forward(request, response);
+                }
                 break;
             case "house":
                 standardRoom = request.getParameter("standardRoom");
                 descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
                 numberOfFloors = request.getParameter("numberOfFloors");
                 facility = new Facility(id, name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, numberOfFloors);
-                facilityService.updateHouse(facility);
+                errors = facilityService.checkFacility(facility);
+                if (errors.isEmpty()) {
+                    facilityService.updateHouse(facility);
+                    response.sendRedirect("/facility");
+                } else {
+                    request.setAttribute("errors", errors);
+                    request.setAttribute("numberOfFloors",numberOfFloors);
+                    request.setAttribute("facility", facility);
+                    List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
+                    List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+                    request.setAttribute("facilityTypeList", facilityTypeList);
+                    request.setAttribute("rentTypeList", rentTypeList);
+                    request.getRequestDispatcher("/facility/update.jsp").forward(request, response);
+                }
                 break;
             case "villa":
                 standardRoom = request.getParameter("standardRoom");
@@ -121,12 +155,23 @@ public class FacilityServlet extends HttpServlet {
                 numberOfFloors = request.getParameter("numberOfFloors");
                 Double poolArea = Double.valueOf(request.getParameter("poolArea"));
                 facility = new Facility(id, name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, numberOfFloors, poolArea);
-                facilityService.updateVilla(facility);
+                errors = facilityService.checkFacility(facility);
+                if (errors.isEmpty()) {
+                    facilityService.updateVilla(facility);
+                    response.sendRedirect("/facility");
+                } else {
+                    request.setAttribute("errors", errors);
+                    request.setAttribute("numberOfFloors",numberOfFloors);
+                    request.setAttribute("facility", facility);
+                    List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
+                    List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+                    request.setAttribute("facilityTypeList", facilityTypeList);
+                    request.setAttribute("rentTypeList", rentTypeList);
+                    request.getRequestDispatcher("/facility/update.jsp").forward(request, response);
+                }
                 break;
         }
-        response.sendRedirect("/facility");
     }
-
 
     private void createFacility(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Facility facility = null;
@@ -145,13 +190,17 @@ public class FacilityServlet extends HttpServlet {
             case "room":
                 String facilityFree = request.getParameter("facilityFree");
                 facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId, facilityFree);
-                errors = facilityService.check(facility);
+                errors = facilityService.checkFacility(facility);
                 if (errors.isEmpty()) {
                     facilityService.insertRoom(facility);
                     response.sendRedirect("/facility");
                 } else {
                     request.setAttribute("errors", errors);
                     request.setAttribute("facility", facility);
+                    List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
+                    List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+                    request.setAttribute("facilityTypeList", facilityTypeList);
+                    request.setAttribute("rentTypeList", rentTypeList);
                     request.getRequestDispatcher("/facility/create.jsp").forward(request, response);
                 }
                 break;
@@ -161,13 +210,18 @@ public class FacilityServlet extends HttpServlet {
                 numberOfFloors = request.getParameter("numberOfFloors");
                 facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId,
                         standardRoom, descriptionOtherConvenience, numberOfFloors);
-                errors = facilityService.check(facility);
+                errors = facilityService.checkFacility(facility);
                 if (errors.isEmpty()) {
                     facilityService.insertHouse(facility);
                     response.sendRedirect("/facility");
                 } else {
                     request.setAttribute("errors", errors);
+                    request.setAttribute("numberOfFloors" ,numberOfFloors);
                     request.setAttribute("facility", facility);
+                    List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
+                    List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+                    request.setAttribute("facilityTypeList", facilityTypeList);
+                    request.setAttribute("rentTypeList", rentTypeList);
                     request.getRequestDispatcher("/facility/create.jsp").forward(request, response);
                 }
                 break;
@@ -178,13 +232,18 @@ public class FacilityServlet extends HttpServlet {
                 Double poolArea = Double.valueOf(request.getParameter("poolArea"));
                 facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId,
                         standardRoom, descriptionOtherConvenience, numberOfFloors, poolArea);
-                errors = facilityService.check(facility);
+                errors = facilityService.checkFacility(facility);
                 if (errors.isEmpty()) {
                     facilityService.insertVilla(facility);
                     response.sendRedirect("/facility");
                 } else {
                     request.setAttribute("errors", errors);
+                    request.setAttribute("numberOfFloors" ,numberOfFloors);
                     request.setAttribute("facility", facility);
+                    List<FacilityType> facilityTypeList = facilityTypeService.selectAllFacilityType();
+                    List<RentType> rentTypeList = rentTypeService.selectAllRentType();
+                    request.setAttribute("facilityTypeList", facilityTypeList);
+                    request.setAttribute("rentTypeList", rentTypeList);
                     request.getRequestDispatcher("/facility/create.jsp").forward(request, response);
                 }
                 break;

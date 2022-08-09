@@ -23,19 +23,15 @@
 <body>
 <div class="container-fluid">
     <%@ include file="../include/header.jsp" %>
-    <h1>Facility List</h1>
+    <h1 class="text-center text-primary m-5">Facility List</h1>
     <div class="row">
         <div class="col-lg-4"><a href="/facility?action=create" class="btn btn-success">Create Facility</a></div>
-        <div class="col-lg-8">
-            <div class="row">
-                <div class="col-lg-8">
-                    <form action="/facility" class="d-flex">
-                        <input class="form-control me-2 w-50" type="text" placeholder="SearchNameOfFacility"
+        <div class="col-lg-8 align-items-lg-end">
+                    <form action="/facility" class="d-flex justify-content-lg-end ">
+                        <input class="form-control w-50" type="text" placeholder="SearchNameOfFacility"
                                name="keyWork" value="${keyWork}" aria-label="Search">
                         <button class="btn btn-success" name="action" value="search" type="submit">Search</button>
                     </form>
-                </div>
-            </div>
         </div>
     </div>
     <div class="table-responsive">
@@ -101,17 +97,20 @@
             <form action="/facility?action=delete" method="get">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="modal-title" id="exampleModalLabel">Facility</h2>
+                        <h2 class="modal-title text-danger" id="exampleModalLabel">Facility</h2>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" readonly name="id" id="deleteId"><br>
-                        <input type="text" readonly name="name" id="deleteName">
+                        <b>ID Facility :</b>
+                        <input type="text" readonly name="id" id="deleteId" class="form-control"><br>
+                        <b>Facility Name</b>
+                        <input type="text" readonly name="name" id="deleteName"class="form-control" ><br>
+                        <h3 class="text-danger">Are you sure want delete </h3>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="action" value="delete">Delete</button>
+                        <button type="submit" class="btn btn-primary" name="action" value="delete">Yes</button>
                     </div>
                 </div>
             </form>

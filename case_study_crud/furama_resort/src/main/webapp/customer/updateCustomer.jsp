@@ -38,11 +38,11 @@
         <div class="mb-3">
             <label for="gender" class="form-label">Gender</label>
             <select id="gender" class="form-select" name="gender">
-                <c:if test="${customer.gender}">
+                <c:if test="${customer.gender==1}">
                     <option value="1" selected>Male</option>
                     <option value="0">FeMale</option>
                 </c:if>
-                <c:if test="${!customer.gender}">
+                <c:if test="${customer.gender==0}">
                     <option value="0" selected>FeMale</option>
                     <option value="1">Male</option>
                 </c:if>

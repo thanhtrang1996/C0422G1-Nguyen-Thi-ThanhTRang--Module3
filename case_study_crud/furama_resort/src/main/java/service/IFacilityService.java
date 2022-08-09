@@ -20,5 +20,5 @@ public interface IFacilityService {
     void insertVilla(Facility facility);
 
     Facility selectFacility(int id);
-    Map<String,String> check(Facility facility);
+    Map<String,String> checkFacility(Facility facility);
 }

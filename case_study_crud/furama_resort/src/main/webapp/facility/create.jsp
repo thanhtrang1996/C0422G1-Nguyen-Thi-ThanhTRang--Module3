@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"/>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 </head>
 </head>
 <body>
@@ -40,44 +41,53 @@
         </div>
         <div class="mb-3">
             <label for="area" class="form-label">Area :</label>
-            <input type="number" class="form-control" id="area" name="area">
+            <input type="number" class="form-control" id="area" name="area"value="${facility.area}">
         </div>
         <div class="mb-3">
             <label for="cost" class="form-label">Cost</label>
-            <input type="number" class="form-control" id="cost" name="cost">
+            <input type="number" class="form-control" id="cost" name="cost"value="${facility.cost}">
         </div>
         <div class="mb-3">
             <label for="max" class="form-label"> Max people</label>
-            <input type="number" class="form-control" id="max" name="maxPeople">
+            <input type="number" class="form-control" id="max" name="maxPeople"value="${facility.maxPeople}">
         </div>
         <div class="mb-3">
-            <label for="rent_type" class="form-label">Rent Type</label>
-            <input type="number" class="form-control" id="rent_type" name="rentTypeId">
+            <select id="rent_type" class="form-control" name="rentTypeId"value="${facility.rentTypeId}">
+                <option selected disabled>Choose Rent Type</option>
+                <c:forEach items="${rentTypeList}" var="rentType">
+                    <option value="${rentType.id}">${rentType.name}</option>
+                </c:forEach>
+            </select>
         </div>
         <div class="mb-3">
-            <label for="facility_type_id" class="form-label">Facility type id</label>
-            <input type="number" class="form-control" id="facility_type_id" name="facilityTypeId">
+            <select id="facility_type_id" class="form-control" name="facilityTypeId">
+                <option selected disabled>Choose Facility Type</option>
+                <c:forEach items="${facilityTypeList}" var="facilityType">
+                    <option value="${facilityType.id}">${facilityType.name}</option>
+                </c:forEach>
+            </select>
 
         </div>
         <div class="mb-3" id="add" style="display: none">
             <label for="standard_room" class="form-label">Standard_room :</label>
-            <input type="text" class="form-control" id="standard_room" name="standardRoom">
+            <input type="text" class="form-control" id="standard_room" name="standardRoom"value="${facility.standardRoom}">
         </div>
         <div class="mb-3" id="add1" style="display: none">
             <label for="convenience" class="form-label">DescriptionOtherConvenience :</label>
-            <input type="text" class="form-control" id="convenience" name="descriptionOtherConvenience">
+            <input type="text" class="form-control" id="convenience" name="descriptionOtherConvenience"value="${facility.descriptionOtherConvenience}">
         </div>
         <div class="mb-3" id="add2" style="display: none">
             <label for="pool_area" class="form-label">Pool_area :</label>
-            <input type="number" class="form-control" id="pool_area" name="poolArea">
+            <input type="number" class="form-control" id="pool_area" name="poolArea"value="${facility.poolArea}">
         </div>
         <div class="mb-3" id="add3" style="display: none">
             <label for="floors" class="form-label">Number_of_floors :</label>
-            <input type="number" class="form-control" id="floors" name="numberOfFloors">
+            <input type="number" class="form-control" id="floors" name="numberOfFloors" value="${facility.numberOfFloors}">
+            <p style="color: red">${errors.get('numberOfFloorsErrors')}</p>
         </div>
         <div class="mb-3" id="add4" style="display: none">
             <label for="facility" class="form-label">Facility_free :</label>
-            <input type="text" class="form-control" id="facility" name="facilityFree">
+            <input type="text" class="form-control" id="facility" name="facilityFree"value="${facility.facilityFree}">
         </div>
         <div>
             <button class="btn btn-success" type="submit">Accept</button>
